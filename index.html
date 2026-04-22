@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>华贸魅KTV - 南京鼓楼 · 夜娱新地标</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: #08080f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* 顶部导航 */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8,8,15,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff2d78, #ff6ec7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+
+        .brand-sub {
+            font-size: 10px;
+            color: #666;
+            letter-spacing: 2px;
+            margin-top: 1px;
+        }
+
+        .top-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #ff2d78, #e02060);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(255,45,120,0.4);
+        }
+
+        /* 背景装饰 */
+        .bg-glow {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,45,120,0.08) 0%, transparent 70%);
+        }
+
+        .bg-glow-2 {
+            bottom: 20%;
+            left: -15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(120,80,255,0.06) 0%, transparent 70%);
+        }
+
+        /* 英雄区 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-size: 200px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.02);
+            letter-spacing: 20px;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(255,45,120,0.15);
+            border: 1px solid rgba(255,45,120,0.3);
+            border-radius: 50px;
+            font-size: 12px;
+            color: #ff6ec7;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,45,120,0.2); }
+            50% { box-shadow: 0 0 25px rgba(255,45,120,0.4); }
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            letter-spacing: 16px;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .hero h1 .line1 {
+            display: block;
+            background: linear-gradient(90deg, #fff 0%, #ff2d78 40%, #ff6ec7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 .line2 {
+            display: block;
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 20px;
+            color: #ff2d78;
+            margin-top: 8px;
+        }
+
+        .hero-desc {
+            margin-top: 24px;
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 4px;
+            line-height: 2;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .hero-tag {
+            padding: 6px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50px;
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+            justify-content: center;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff2d78, #ff6ec7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, #ff2d78, #e02060);
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 15px;
+            letter-spacing: 3px;
+            box-shadow: 0 8px 30px rgba(255,45,120,0.35);
+            transition: all 0.3s;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 15px;
+            letter-spacing: 3px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.96);
+        }
+
+        /* 通用内容区 */
+        .section {
+            padding: 60px 20px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .section-eyebrow {
+            font-size: 11px;
+            color: #ff2d78;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .section-desc {
+            color: #555;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        /* 包间卡片 */
+        .room-scroll {
+            overflow-x: auto;
+            padding: 0 20px 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .room-scroll::-webkit-scrollbar { display: none; }
+
+        .room-list {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+        }
+
+        .room-card {
+            width: 280px;
+            flex-shrink: 0;
+            background: linear-gradient(160deg, #13131f, #0e0e18);
+            border-radius: 20px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .room-card:active {
+            transform: scale(0.97);
+        }
+
+        .room-cover {
+            height: 160px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+        }
+
+        .room-cover::after {
+            content: '720° 全景';
+            position: absolute;
+            bottom: 10px;
+            right: 12px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+        }
+
+        .room-body {
+            padding: 20px;
+        }
+
+        .room-name {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .room-desc {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .room-meta {
+            display: flex;
+            gap: 6px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .room-meta-tag {
+            padding: 4px 12px;
+            background: rgba(255,45,120,0.12);
+            color: #ff6ec7;
+            border-radius: 50px;
+            font-size: 11px;
+        }
+
+        /* 亮点特色 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: linear-gradient(160deg, #13131f, #0e0e18);
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .feature-name {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .feature-text {
+            font-size: 11px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* 联系区 */
+        .contact-panel {
+            margin: 20px;
+            background: linear-gradient(160deg, #13131f, #0e0e18);
+            border-radius: 24px;
+            padding: 36px 24px;
+            text-align: center;
+            border: 1px solid rgba(255,45,120,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff2d78, transparent);
+        }
+
+        .contact-panel .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .contact-panel .label {
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+        }
+
+        .contact-panel .phone {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ff2d78;
+            letter-spacing: 4px;
+        }
+
+        .contact-panel .address {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+            letter-spacing: 1px;
+            line-height: 2;
+        }
+
+        .contact-panel .hours {
+            font-size: 12px;
+            color: #444;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+
+        .call-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 28px;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff2d78, #e02060);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            letter-spacing: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(255,45,120,0.35);
+        }
+
+        /* 反馈区 */
+        .feedback-panel {
+            margin: 0 20px 20px;
+            background: linear-gradient(160deg, #13131f, #0e0e18);
+            border-radius: 24px;
+            padding: 32px 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .feedback-panel h3 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .feedback-panel .sub {
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .feedback-panel iframe {
+            width: 100%;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 40px 20px 120px;
+            color: #333;
+            font-size: 11px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 68px;
+            background: rgba(8,8,15,0.98);
+            backdrop-filter: blur(24px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: env(safe-area-inset-bottom, 0);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            color: #444;
+            text-decoration: none;
+            padding: 6px 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-item.active {
+            color: #ff2d78;
+        }
+
+        .nav-item:active {
+            color: #ff2d78;
+        }
+
+        .nav-icon {
+            font-size: 22px;
+        }
+
+        .nav-text {
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* 全景弹窗 */
+        .pano-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.97);
+        }
+
+        .pano-overlay.active {
+            display: block;
+        }
+
+        .pano-inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pano-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pano-title-text {
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        .pano-close-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.08);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .pano-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .pano-mic {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pano-hint {
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+        }
+
+        .pano-tip {
+            padding: 16px 24px;
+            background: rgba(255,45,120,0.1);
+            border-radius: 12px;
+            color: #ff6ec7;
+            font-size: 13px;
+            letter-spacing: 1px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* 动画 */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ::-webkit-scrollbar { display: none; }
+
+        /* 豪华分隔线 */
+        .divider {
+            height: 1px;
+            margin: 20px 40px;
+            background: linear-gradient(90deg, transparent, rgba(255,45,120,0.3), transparent);
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景光 -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="brand">
+            <div class="brand-name">华贸魅KTV</div>
+            <div class="brand-sub">南京鼓楼 · 夜娱新地标</div>
+        </div>
+        <a href="tel:18252023750" class="top-action">📞 预约</a>
+    </div>
+
+    <!-- 英雄区 -->
+    <section class="hero">
+        <div class="hero-bg-text">魅</div>
+
+        <div class="hero-badge">
+            <span>✦</span>
+            <span>南京鼓楼 · 华贸广场</span>
+            <span>✦</span>
+        </div>
+
+        <h1>
+            <span class="line1">华贸魅KTV</span>
+            <span class="line2">MEI KTV</span>
+        </h1>
+
+        <div class="hero-desc">
+            沉浸式全景包间 · 专业音响系统<br>
+            24小时不打烊的娱乐圣地
+        </div>
+
+        <div class="hero-tags">
+            <span class="hero-tag">🎤 KTV</span>
+            <span class="hero-tag">🎉 派对</span>
+            <span class="hero-tag">🛋️ 商务</span>
+            <span class="hero-tag">🌃 夜景</span>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-num">30+</div>
+                <div class="stat-label">精选包间</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">JBL</div>
+                <div class="stat-label">专业音响</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">24H</div>
+                <div class="stat-label">不打烊</div>
+            </div>
+        </div>
+
+        <div class="hero-cta">
+            <a href="tel:18252023750" class="btn-primary">📞 立即预约</a>
+            <a href="#rooms" class="btn-secondary">🎵 查看包间</a>
+        </div>
+    </section>
+
+    <!-- 包间展示 -->
+    <section class="section" id="rooms">
+        <div class="section-header fade-up">
+            <div class="section-eyebrow">— ROOMS —</div>
+            <div class="section-title">精选包间</div>
+            <div class="section-desc">点击卡面 查看720°全景</div>
+        </div>
+
+        <div class="room-scroll fade-up">
+            <div class="room-list">
+                <div class="room-card" onclick="showPano('豪华商务包')">
+                    <div class="room-cover" style="background: linear-gradient(135deg, #1a0a2e, #2d1a4a);">🛋️</div>
+                    <div class="room-body">
+                        <div class="room-name">豪华商务包</div>
+                        <div class="room-desc">30-40㎡ · 8-12人<br>高端接待 · 商务宴请</div>
+                        <div class="room-meta">
+                            <span class="room-meta-tag">商务</span>
+                            <span class="room-meta-tag">全景</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="room-card" onclick="showPano('浪漫情侣包')">
+                    <div class="room-cover" style="background: linear-gradient(135deg, #2a0a2a, #4a1a4a);">💕</div>
+                    <div class="room-body">
+                        <div class="room-name">浪漫情侣包</div>
+                        <div class="room-desc">15-20㎡ · 2-4人<br>星空顶 · 甜蜜约会</div>
+                        <div class="room-meta">
+                            <span class="room-meta-tag">浪漫</span>
+                            <span class="room-meta-tag">全景</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="room-card" onclick="showPano('超级派对包')">
+                    <div class="room-cover" style="background: linear-gradient(135deg, #0a1a2e, #1a2d4a);">🎉</div>
+                    <div class="room-body">
+                        <div class="room-name">超级派对包</div>
+                        <div class="room-desc">60-80㎡ · 20-30人<br>舞美灯光 · 狂欢盛宴</div>
+                        <div class="room-meta">
+                            <span class="room-meta-tag">派对</span>
+                            <span class="room-meta-tag">全景</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="room-card" onclick="showPano('家庭欢聚包')">
+                    <div class="room-cover" style="background: linear-gradient(135deg, #1a2a0a, #3a4a1a);">👨‍👩‍👧</div>
+                    <div class="room-body">
+                        <div class="room-name">家庭欢聚包</div>
+                        <div class="room-desc">25-35㎡ · 6-8人<br>温馨舒适 · 家庭首选</div>
+                        <div class="room-meta">
+                            <span class="room-meta-tag">家庭</span>
+                            <span class="room-meta-tag">全景</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="room-card" onclick="showPano('迷你欢唱包')">
+                    <div class="room-cover" style="background: linear-gradient(135deg, #2a1a0a, #4a2a1a);">🎙️</div>
+                    <div class="room-body">
+                        <div class="room-name">迷你欢唱包</div>
+                        <div class="room-desc">10-15㎡ · 1-3人<br>一人独享 · 轻松自在</div>
+                        <div class="room-meta">
+                            <span class="room-meta-tag">迷你</span>
+                            <span class="room-meta-tag">全景</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 亮点特色 -->
+    <section class="section">
+        <div class="section-header fade-up">
+            <div class="section-eyebrow">— FEATURES —</div>
+            <div class="section-title">为什么选择我们</div>
+        </div>
+        <div class="features fade-up">
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <div class="feature-name">JBL专业音响</div>
+                <div class="feature-text">全球顶级音响设备，还原每一个音符</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <div class="feature-name">720°全景包间</div>
+                <div class="feature-text">在线预览包间环境，提前选定心仪空间</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <div class="feature-name">24H不打烊</div>
+                <div class="feature-text">全天候营业，随时随地，想唱就唱</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍷</div>
+                <div class="feature-name">品质酒水</div>
+                <div class="feature-text">精选酒水套餐，品质保证</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 联系方式 -->
+    <section class="section">
+        <div class="section-header fade-up">
+            <div class="section-eyebrow">— CONTACT —</div>
+            <div class="section-title">联系我们</div>
+        </div>
+        <div class="contact-panel fade-up">
+            <div class="icon">📞</div>
+            <div class="label">预约热线</div>
+            <div class="phone">182-5202-3750</div>
+            <div class="address">
+                南京市鼓楼区华贸广场<br>
+                （近地铁口 · 免费停车）
+            </div>
+            <div class="hours">营业时间：全天24小时</div>
+            <a href="tel:18252023750" class="call-btn">📱 一键拨打热线</a>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 意见反馈 -->
+    <section class="section">
+        <div class="feedback-panel fade-up">
+            <h3>意见反馈</h3>
+            <div class="sub">您的建议是我们进步的动力</div>
+            <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"
+                    height="400" style="border:none; background:transparent; width:100%;">
+                加载中...
+            </iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 华贸魅KTV | 南京市鼓楼区华贸广场</p>
+    </footer>
+
+    <!-- 全景弹窗 -->
+    <div class="pano-overlay" id="panoOverlay">
+        <div class="pano-inner">
+            <div class="pano-header">
+                <span class="pano-title-text" id="panoTitleText">包间全景</span>
+                <button class="pano-close-btn" onclick="hidePano()">✕</button>
+            </div>
+            <div class="pano-body">
+                <div class="pano-mic">🎤</div>
+                <div class="pano-hint">720° 全景展示</div>
+                <div class="pano-tip">
+                    滑动屏幕旋转视角<br>
+                    身临其境 · 沉浸体验
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+        <a href="#rooms" class="nav-item">
+            <span class="nav-icon">🎵</span>
+            <span class="nav-text">包间</span>
+        </a>
+        <a href="tel:18252023750" class="nav-item">
+            <span class="nav-icon">📞</span>
+            <span class="nav-text">预约</span>
+        </a>
+        <a href="#rooms" class="nav-item" onclick="document.getElementById('panoOverlay').classList.add('active')">
+            <span class="nav-icon">👁️</span>
+            <span class="nav-text">全景</span>
+        </a>
+    </nav>
+
+    <script>
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // 全景弹窗
+        function showPano(name) {
+            document.getElementById('panoTitleText').textContent = name;
+            document.getElementById('panoOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hidePano() {
+            document.getElementById('panoOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('panoOverlay').addEventListener('click', function(e) {
+            if (e.target === this) hidePano();
+        });
+    </script>
+</body>
+</html>

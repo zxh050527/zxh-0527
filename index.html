@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="description" content="华贸魅KTV位于南京鼓楼区华贸中心，配备JBL专业音响，提供沉浸式全景包间，是您商务聚会、朋友欢唱的理想选择。">
+    <meta name="robots" content="index, follow">
     <title>华贸魅KTV - 南京鼓楼 · 夜娱新地标</title>
+    <link rel="canonical" href="https://www.example.com/">
     <style>
         * {
             margin: 0;
@@ -16,84 +20,88 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background: #08080f;
+            background: #05050d;
             color: #fff;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* 顶部导航 */
-        .top-bar {
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 15% 0%, rgba(255,45,120,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 85% 15%, rgba(130,40,255,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 120% 60% at 50% 100%, rgba(255,45,120,0.05) 0%, transparent 50%);
+            pointer-events: none; z-index: 0;
+        }
+
+        /* ========== 头部 ========== */
+        header {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 100;
             padding: 14px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(8,8,15,0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(5,5,13,0.88);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
         }
 
-        .brand {
-            display: flex;
-            flex-direction: column;
-        }
+        .brand { display: flex; flex-direction: column; }
 
         .brand-name {
-            font-size: 18px;
-            font-weight: 800;
-            background: linear-gradient(90deg, #ff2d78, #ff6ec7);
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ff2d78, #ff6ec7, #ff2d78);
+            background-size: 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 3px;
+            animation: shimmer 3s linear infinite;
+            letter-spacing: 4px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
         }
 
         .brand-sub {
             font-size: 10px;
-            color: #666;
-            letter-spacing: 2px;
+            color: #555;
+            letter-spacing: 3px;
             margin-top: 1px;
         }
 
-        .top-action {
+        .top-call {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
-            background: linear-gradient(135deg, #ff2d78, #e02060);
+            gap: 6px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ff2d78, #c4124e);
             border-radius: 50px;
             color: #fff;
             text-decoration: none;
             font-size: 13px;
-            letter-spacing: 2px;
-            box-shadow: 0 4px 15px rgba(255,45,120,0.4);
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(255,45,120,0.5), 0 0 50px rgba(255,45,120,0.18);
+            transition: all 0.25s;
         }
 
-        /* 背景装饰 */
-        .bg-glow {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-        }
+        .top-call:active { transform: scale(0.94); }
 
-        .bg-glow-1 {
-            top: -20%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255,45,120,0.08) 0%, transparent 70%);
-        }
+        /* ========== 主内容 ========== */
+        main { position: relative; z-index: 1; }
 
-        .bg-glow-2 {
-            bottom: 20%;
-            left: -15%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(120,80,255,0.06) 0%, transparent 70%);
-        }
+        /* 背景光 */
+        .bg-glow { position: fixed; pointer-events: none; z-index: 0; }
+        .glow-1 { top: -20%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,45,120,0.07) 0%, transparent 65%); }
+        .glow-2 { bottom: 30%; left: -25%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(160,80,255,0.05) 0%, transparent 65%); }
+        .glow-3 { top: 50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,100,80,0.04) 0%, transparent 65%); }
 
         /* 英雄区 */
         .hero {
@@ -103,364 +111,423 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 80px 24px 120px;
+            padding: 90px 24px 120px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-bg-text {
+        .hero::before {
+            content: '';
             position: absolute;
-            font-size: 200px;
-            font-weight: 900;
-            color: rgba(255,255,255,0.02);
-            letter-spacing: 20px;
-            white-space: nowrap;
-            user-select: none;
+            top: -120px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,45,120,0.14) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
         }
 
-        .hero-badge {
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 260px;
+            background: linear-gradient(0deg, #05050d 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 20px;
-            background: rgba(255,45,120,0.15);
-            border: 1px solid rgba(255,45,120,0.3);
+            padding: 8px 22px;
+            border: 1px solid rgba(255,45,120,0.32);
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 10px;
             color: #ff6ec7;
             letter-spacing: 3px;
-            margin-bottom: 30px;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(255,45,120,0.2); }
-            50% { box-shadow: 0 0 25px rgba(255,45,120,0.4); }
+            margin-bottom: 32px;
+            background: rgba(255,45,120,0.08);
+            backdrop-filter: blur(12px);
+            position: relative; z-index: 2;
         }
 
         .hero h1 {
-            font-size: 56px;
+            font-size: 46px;
             font-weight: 900;
-            letter-spacing: 16px;
-            line-height: 1.1;
-            margin-bottom: 8px;
+            letter-spacing: 12px;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            position: relative; z-index: 2;
         }
 
-        .hero h1 .line1 {
+        .hero-title-main {
             display: block;
-            background: linear-gradient(90deg, #fff 0%, #ff2d78 40%, #ff6ec7 100%);
+            background: linear-gradient(90deg, #fff 0%, #ff2d78 60%, #ff8ec4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero h1 .line2 {
+        .hero-title-en {
             display: block;
-            font-size: 20px;
+            font-size: 11px;
             font-weight: 400;
-            letter-spacing: 20px;
+            letter-spacing: 14px;
             color: #ff2d78;
-            margin-top: 8px;
+            margin-top: 10px;
+        }
+
+        .hero-divider {
+            width: 48px; height: 2px;
+            background: linear-gradient(90deg, transparent, #ff2d78, transparent);
+            margin: 22px auto;
+            position: relative; z-index: 2;
         }
 
         .hero-desc {
-            margin-top: 24px;
-            color: #666;
-            font-size: 14px;
-            letter-spacing: 4px;
-            line-height: 2;
+            color: #707080;
+            font-size: 13px;
+            letter-spacing: 2px;
+            line-height: 2.2;
+            position: relative; z-index: 2;
         }
 
-        .hero-tags {
+        .hero-pills {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 22px;
+            position: relative; z-index: 2;
         }
 
-        .hero-tag {
+        .hero-pill {
             padding: 6px 16px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.07);
             border-radius: 50px;
-            font-size: 12px;
-            color: #888;
+            font-size: 11px;
+            color: #666;
             letter-spacing: 1px;
+            backdrop-filter: blur(12px);
         }
 
         .hero-stats {
             display: flex;
-            gap: 40px;
-            margin-top: 50px;
+            gap: 36px;
+            margin-top: 42px;
             justify-content: center;
+            position: relative; z-index: 2;
         }
 
-        .stat {
-            text-align: center;
-        }
+        .hero-stat { text-align: center; }
 
-        .stat-num {
+        .hero-stat-num {
             font-size: 28px;
-            font-weight: 800;
+            font-weight: 900;
             background: linear-gradient(135deg, #ff2d78, #ff6ec7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: block;
         }
 
-        .stat-label {
-            font-size: 11px;
-            color: #555;
+        .hero-stat-label {
+            font-size: 10px;
+            color: #3a3a50;
             letter-spacing: 2px;
             margin-top: 4px;
         }
 
         .hero-cta {
-            margin-top: 40px;
+            margin-top: 46px;
             display: flex;
-            gap: 16px;
+            gap: 14px;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative; z-index: 2;
         }
 
-        .btn-primary {
+        .btn-call {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 16px 36px;
-            background: linear-gradient(135deg, #ff2d78, #e02060);
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #ff2d78 0%, #c4124e 100%);
             color: #fff;
             border-radius: 50px;
             text-decoration: none;
             font-size: 15px;
+            font-weight: 700;
             letter-spacing: 3px;
-            box-shadow: 0 8px 30px rgba(255,45,120,0.35);
-            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(255,45,120,0.55), 0 0 70px rgba(255,45,120,0.22);
+            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-primary:active {
-            transform: scale(0.96);
+        .btn-call::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 220%; height: 220%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+            animation: btnSheen 3s ease-in-out infinite;
         }
 
-        .btn-secondary {
+        @keyframes btnSheen {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .btn-call:active { transform: scale(0.95); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+
+        .btn-rooms {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 16px 36px;
-            background: rgba(255,255,255,0.05);
+            padding: 18px 40px;
+            background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.1);
-            color: #ccc;
+            color: #888;
             border-radius: 50px;
             text-decoration: none;
             font-size: 15px;
+            font-weight: 600;
             letter-spacing: 3px;
+            backdrop-filter: blur(12px);
             transition: all 0.3s;
         }
 
-        .btn-secondary:active {
-            transform: scale(0.96);
-        }
+        .btn-rooms:active { background: rgba(255,255,255,0.09); color: #aaa; transform: scale(0.95); }
 
-        /* 通用内容区 */
+        /* 通用 */
         .section {
-            padding: 60px 20px 20px;
-            position: relative;
-            z-index: 1;
+            padding: 64px 0 24px;
+            position: relative; z-index: 1;
         }
 
-        .section-header {
+        .section-hd {
             text-align: center;
-            margin-bottom: 36px;
+            margin-bottom: 28px;
+            padding: 0 20px;
         }
 
-        .section-eyebrow {
-            font-size: 11px;
+        .section-tag {
+            font-size: 9px;
             color: #ff2d78;
-            letter-spacing: 4px;
-            margin-bottom: 8px;
+            letter-spacing: 7px;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 0 0 24px rgba(255,45,120,0.5);
         }
 
         .section-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             letter-spacing: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
-        .section-desc {
-            color: #555;
-            font-size: 13px;
+        .section-sub {
+            font-size: 11px;
+            color: #3a3a50;
             letter-spacing: 2px;
         }
 
-        /* 包间卡片 */
-        .room-scroll {
+        /* 包间横向滚动 */
+        .rooms-scroll {
             overflow-x: auto;
-            padding: 0 20px 20px;
+            padding: 0 16px 28px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
 
-        .room-scroll::-webkit-scrollbar { display: none; }
+        .rooms-scroll::-webkit-scrollbar { display: none; }
 
-        .room-list {
+        .rooms-list {
             display: flex;
             gap: 16px;
             width: max-content;
+            padding-right: 16px;
         }
 
         .room-card {
-            width: 280px;
+            width: 264px;
             flex-shrink: 0;
-            background: linear-gradient(160deg, #13131f, #0e0e18);
-            border-radius: 20px;
-            overflow: hidden;
             scroll-snap-align: start;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(18,14,32,0.75);
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(24px) saturate(170%);
+            -webkit-backdrop-filter: blur(24px) saturate(170%);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04) inset;
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+            cursor: pointer;
         }
 
-        .room-card:active {
-            transform: scale(0.97);
+        .room-card:active { transform: scale(0.96) translateY(3px); }
+
+        .room-img-wrap { position: relative; overflow: hidden; }
+
+        .room-img {
+            width: 100%; height: 190px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
         }
 
-        .room-cover {
-            height: 160px;
-            position: relative;
+        .room-card:active .room-img { transform: scale(1.07); }
+
+        .room-img-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(0deg, rgba(18,14,32,0.75) 0%, transparent 50%);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 56px;
+            align-items: flex-end;
+            padding: 14px 16px;
         }
 
-        .room-cover::after {
-            content: '720° 全景';
-            position: absolute;
-            bottom: 10px;
-            right: 12px;
-            font-size: 10px;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 1px;
+        .room-img-tag {
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.65);
+            background: rgba(0,0,0,0.5);
+            padding: 4px 12px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
         }
 
-        .room-body {
-            padding: 20px;
-        }
+        .room-body { padding: 20px 18px 22px; }
 
         .room-name {
             font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 6px;
+        }
+
+        .room-desc {
+            font-size: 12px;
+            color: #555050;
+            line-height: 1.8;
+        }
+
+        .room-footer {
+            display: flex;
+            gap: 7px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .room-badge {
+            padding: 4px 13px;
+            background: rgba(255,45,120,0.13);
+            border: 1px solid rgba(255,45,120,0.22);
+            color: #ff6ec7;
+            border-radius: 50px;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* 特色亮点 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            padding: 0 16px;
+            margin-top: 8px;
+        }
+
+        .feat {
+            background: rgba(18,14,32,0.7);
+            border-radius: 20px;
+            padding: 26px 18px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.07);
+            backdrop-filter: blur(22px) saturate(170%);
+            -webkit-backdrop-filter: blur(22px) saturate(170%);
+            box-shadow: 0 10px 32px rgba(0,0,0,0.4);
+            transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
+        }
+
+        .feat:active { background: rgba(28,22,50,0.8); transform: scale(0.96); }
+
+        .feat-icon {
+            font-size: 36px;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 14px rgba(255,255,255,0.1));
+        }
+
+        .feat-title {
+            font-size: 13px;
             font-weight: 700;
             letter-spacing: 2px;
             margin-bottom: 6px;
         }
 
-        .room-desc {
-            color: #666;
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        .room-meta {
-            display: flex;
-            gap: 6px;
-            margin-top: 14px;
-            flex-wrap: wrap;
-        }
-
-        .room-meta-tag {
-            padding: 4px 12px;
-            background: rgba(255,45,120,0.12);
-            color: #ff6ec7;
-            border-radius: 50px;
+        .feat-desc {
             font-size: 11px;
+            color: #464655;
+            line-height: 1.7;
         }
 
-        /* 亮点特色 */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 0 20px;
-        }
-
-        .feature-card {
-            background: linear-gradient(160deg, #13131f, #0e0e18);
-            border-radius: 16px;
-            padding: 24px 20px;
+        /* 联系卡片 */
+        .contact-card {
+            margin: 20px 16px;
+            background: rgba(18,14,32,0.75);
+            border-radius: 28px;
+            padding: 44px 24px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,45,120,0.18);
+            backdrop-filter: blur(26px) saturate(190%);
+            -webkit-backdrop-filter: blur(26px) saturate(190%);
+            position: relative; overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(255,45,120,0.07);
         }
 
-        .feature-icon {
-            font-size: 36px;
-            margin-bottom: 12px;
-        }
-
-        .feature-name {
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .feature-text {
-            font-size: 11px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        /* 联系区 */
-        .contact-panel {
-            margin: 20px;
-            background: linear-gradient(160deg, #13131f, #0e0e18);
-            border-radius: 24px;
-            padding: 36px 24px;
-            text-align: center;
-            border: 1px solid rgba(255,45,120,0.15);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-panel::before {
+        .contact-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff2d78, transparent);
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,45,120,0.7), transparent);
         }
 
-        .contact-panel .icon {
-            font-size: 48px;
-            margin-bottom: 16px;
+        .contact-card::after {
+            content: '';
+            position: absolute;
+            top: -100px; left: 50%; transform: translateX(-50%);
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(255,45,120,0.1) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        .contact-panel .label {
-            font-size: 11px;
-            color: #555;
-            letter-spacing: 4px;
-            margin-bottom: 12px;
-        }
-
-        .contact-panel .phone {
+        .contact-icon { font-size: 48px; margin-bottom: 16px; position: relative; z-index: 1; }
+        .contact-label { font-size: 10px; color: #555; letter-spacing: 5px; margin-bottom: 12px; position: relative; z-index: 1; }
+        .contact-phone {
             font-size: 32px;
-            font-weight: 800;
+            font-weight: 900;
             color: #ff2d78;
             letter-spacing: 4px;
+            display: block;
+            position: relative; z-index: 1;
+            text-shadow: 0 0 30px rgba(255,45,120,0.4);
         }
 
-        .contact-panel .address {
-            margin-top: 20px;
+        .contact-addr {
+            margin-top: 22px;
             font-size: 13px;
             color: #666;
             letter-spacing: 1px;
             line-height: 2;
+            position: relative; z-index: 1;
         }
 
-        .contact-panel .hours {
-            font-size: 12px;
+        .contact-hours {
+            font-size: 11px;
             color: #444;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-top: 8px;
+            position: relative; z-index: 1;
         }
 
         .call-btn {
@@ -468,76 +535,139 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 28px;
-            padding: 18px;
-            background: linear-gradient(135deg, #ff2d78, #e02060);
+            margin-top: 32px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff2d78, #c4124e);
             color: #fff;
-            border: none;
-            border-radius: 16px;
+            border-radius: 18px;
             font-size: 16px;
-            letter-spacing: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            box-shadow: 0 8px 30px rgba(255,45,120,0.35);
-        }
-
-        /* 反馈区 */
-        .feedback-panel {
-            margin: 0 20px 20px;
-            background: linear-gradient(160deg, #13131f, #0e0e18);
-            border-radius: 24px;
-            padding: 32px 24px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .feedback-panel h3 {
-            font-size: 18px;
             font-weight: 700;
-            letter-spacing: 3px;
-            text-align: center;
+            letter-spacing: 4px;
+            text-decoration: none;
+            box-shadow: 0 10px 36px rgba(255,45,120,0.5), 0 0 60px rgba(255,45,120,0.2);
+            transition: all 0.3s;
+            position: relative; z-index: 1;
+        }
+
+        .call-btn:active { transform: scale(0.96); }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-decoration: none;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s;
+            position: relative; z-index: 1;
+        }
+
+        .nav-btn:active { background: rgba(255,255,255,0.08); color: #fff; transform: scale(0.98); }
+
+        /* 分隔线 */
+        .sep {
+            height: 1px;
+            margin: 16px 40px;
+            background: linear-gradient(90deg, transparent, rgba(255,45,120,0.2), transparent);
+        }
+
+        /* 关于我们 */
+        .about-card {
+            margin: 20px 16px;
+            background: rgba(18,14,32,0.75);
+            border-radius: 28px;
+            padding: 40px 24px;
+            border: 1px solid rgba(255,255,255,0.07);
+            backdrop-filter: blur(26px) saturate(190%);
+            -webkit-backdrop-filter: blur(26px) saturate(190%);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .about-text {
+            font-size: 14px;
+            color: #707080;
+            letter-spacing: 1px;
+            line-height: 2;
+        }
+
+        .about-item {
+            margin-bottom: 20px;
+        }
+
+        .about-item-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ff6ec7;
+            letter-spacing: 2px;
             margin-bottom: 8px;
         }
 
-        .feedback-panel .sub {
-            text-align: center;
-            font-size: 12px;
-            color: #555;
-            letter-spacing: 2px;
-            margin-bottom: 24px;
-        }
-
-        .feedback-panel iframe {
-            width: 100%;
-            border-radius: 12px;
-            border: none;
-            background: transparent;
+        .about-item p {
+            font-size: 13px;
+            color: #666;
+            letter-spacing: 1px;
+            line-height: 1.9;
         }
 
         /* 页脚 */
         footer {
+            padding: 40px 20px 100px;
+            position: relative; z-index: 1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-link {
+            font-size: 11px;
+            color: #444;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover { color: #ff6ec7; }
+
+        .footer-copy {
             text-align: center;
-            padding: 40px 20px 120px;
             color: #333;
             font-size: 11px;
             letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
+        }
+
+        .footer-icp {
+            margin-top: 8px;
+            font-size: 10px;
+            color: #2a2a2a;
+            letter-spacing: 1px;
         }
 
         /* 底部导航 */
         .bottom-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 68px;
-            background: rgba(8,8,15,0.98);
-            backdrop-filter: blur(24px);
+            bottom: 0; left: 0; right: 0;
+            height: 72px;
+            background: rgba(5,5,13,0.92);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 1000;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.06);
             padding-bottom: env(safe-area-inset-bottom, 0);
         }
 
@@ -545,396 +675,551 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             color: #444;
             text-decoration: none;
-            padding: 6px 20px;
-            transition: color 0.3s;
+            padding: 8px 32px;
+            transition: all 0.3s;
         }
 
-        .nav-item.active {
-            color: #ff2d78;
-        }
+        .nav-item:active { color: #ff2d78; }
 
-        .nav-item:active {
-            color: #ff2d78;
-        }
-
-        .nav-icon {
-            font-size: 22px;
-        }
-
-        .nav-text {
-            font-size: 10px;
-            letter-spacing: 1px;
-        }
+        .nav-icon { font-size: 24px; }
+        .nav-text { font-size: 10px; letter-spacing: 1px; }
 
         /* 全景弹窗 */
-        .pano-overlay {
+        .pano {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 2000;
-            background: rgba(0,0,0,0.97);
+            background: rgba(2,2,8,0.98);
         }
 
-        .pano-overlay.active {
-            display: block;
-        }
-
-        .pano-inner {
-            height: 100%;
+        .pano.active {
             display: flex;
             flex-direction: column;
         }
 
-        .pano-header {
+        .pano-inner { height: 100%; display: flex; flex-direction: column; }
+
+        .pano-hd {
             padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(5,5,13,0.9);
+            backdrop-filter: blur(20px);
+            flex-shrink: 0;
+            z-index: 10;
         }
 
-        .pano-title-text {
-            font-size: 16px;
-            letter-spacing: 2px;
-        }
+        .pano-title { font-size: 16px; letter-spacing: 3px; }
 
-        .pano-close-btn {
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.08);
+        .pano-close {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.07);
             border: none;
             border-radius: 50%;
             color: #fff;
             font-size: 18px;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .pano-body {
+        .pano-close:active { background: rgba(255,255,255,0.15); transform: scale(0.9); }
+
+        .pano-bd {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow: hidden;
         }
 
-        .pano-mic {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
+        .pano-img-container {
+            width: 100%;
+            max-width: 540px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 100px rgba(255,45,120,0.1);
+            position: relative;
+            touch-action: none;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .pano-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            transform-origin: center;
+            transition: transform 0.3s ease;
+            cursor: grab;
+            -webkit-user-drag: none;
+            user-select: none;
+            max-width: 100%;
         }
 
-        .pano-hint {
-            color: #666;
-            font-size: 14px;
-            letter-spacing: 3px;
-            margin-bottom: 24px;
-        }
+        .pano-img.dragging { cursor: grabbing; transition: none; }
 
         .pano-tip {
+            margin-top: 28px;
             padding: 16px 24px;
-            background: rgba(255,45,120,0.1);
-            border-radius: 12px;
-            color: #ff6ec7;
+            background: rgba(255,255,255,0.04);
+            border-radius: 14px;
+            color: #888;
             font-size: 13px;
             letter-spacing: 1px;
-            line-height: 1.8;
             text-align: center;
+            line-height: 1.9;
+            border: 1px solid rgba(255,255,255,0.07);
+            backdrop-filter: blur(12px);
+        }
+
+        .pano-tip-sub {
+            margin-top: 6px;
+            color: #555;
+            font-size: 12px;
+            letter-spacing: 1px;
         }
 
         /* 动画 */
         .fade-up {
             opacity: 0;
-            transform: translateY(24px);
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(22px);
+            transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+                        transform 0.6s cubic-bezier(0.22,1,0.36,1);
         }
 
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
 
         ::-webkit-scrollbar { display: none; }
-
-        /* 豪华分隔线 */
-        .divider {
-            height: 1px;
-            margin: 20px 40px;
-            background: linear-gradient(90deg, transparent, rgba(255,45,120,0.3), transparent);
-        }
     </style>
 </head>
 <body>
     <!-- 背景光 -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
 
-    <!-- 顶部栏 -->
-    <div class="top-bar">
+    <!-- 头部 -->
+    <header>
         <div class="brand">
             <div class="brand-name">华贸魅KTV</div>
-            <div class="brand-sub">南京鼓楼 · 夜娱新地标</div>
+            <div class="brand-sub">南京鼓楼 · 华贸中心</div>
         </div>
-        <a href="tel:18252023750" class="top-action">📞 预约</a>
-    </div>
+        <a href="tel:18252023750" class="top-call">📞 预约</a>
+    </header>
 
-    <!-- 英雄区 -->
-    <section class="hero">
-        <div class="hero-bg-text">魅</div>
-
-        <div class="hero-badge">
-            <span>✦</span>
-            <span>南京鼓楼 · 华贸广场</span>
-            <span>✦</span>
-        </div>
-
-        <h1>
-            <span class="line1">华贸魅KTV</span>
-            <span class="line2">MEI KTV</span>
-        </h1>
-
-        <div class="hero-desc">
-            沉浸式全景包间 · 专业音响系统<br>
-            24小时不打烊的娱乐圣地
-        </div>
-
-        <div class="hero-tags">
-            <span class="hero-tag">🎤 KTV</span>
-            <span class="hero-tag">🎉 派对</span>
-            <span class="hero-tag">🛋️ 商务</span>
-            <span class="hero-tag">🌃 夜景</span>
-        </div>
-
-        <div class="hero-stats">
-            <div class="stat">
-                <div class="stat-num">30+</div>
-                <div class="stat-label">精选包间</div>
+    <!-- 主内容 -->
+    <main>
+        <!-- 英雄区 -->
+        <section class="hero">
+            <div class="hero-eyebrow">✦ 南京鼓楼 · 夜娱新地标 ✦</div>
+            <h1>
+                <span class="hero-title-main">华贸魅KTV</span>
+                <span class="hero-title-en">MEI KTV</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-desc">
+                沉浸式全景包间 · JBL专业音响<br>
+                营业时间 12:00 — 凌晨5:00
+            </p>
+            <div class="hero-pills">
+                <span class="hero-pill">🎤 KTV</span>
+                <span class="hero-pill">🎉 派对</span>
+                <span class="hero-pill">🛋️ 商务</span>
+                <span class="hero-pill">🌃 夜景</span>
             </div>
-            <div class="stat">
-                <div class="stat-num">JBL</div>
-                <div class="stat-label">专业音响</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num">24H</div>
-                <div class="stat-label">不打烊</div>
-            </div>
-        </div>
-
-        <div class="hero-cta">
-            <a href="tel:18252023750" class="btn-primary">📞 立即预约</a>
-            <a href="#rooms" class="btn-secondary">🎵 查看包间</a>
-        </div>
-    </section>
-
-    <!-- 包间展示 -->
-    <section class="section" id="rooms">
-        <div class="section-header fade-up">
-            <div class="section-eyebrow">— ROOMS —</div>
-            <div class="section-title">精选包间</div>
-            <div class="section-desc">点击卡面 查看720°全景</div>
-        </div>
-
-        <div class="room-scroll fade-up">
-            <div class="room-list">
-                <div class="room-card" onclick="showPano('豪华商务包')">
-                    <div class="room-cover" style="background: linear-gradient(135deg, #1a0a2e, #2d1a4a);">🛋️</div>
-                    <div class="room-body">
-                        <div class="room-name">豪华商务包</div>
-                        <div class="room-desc">30-40㎡ · 8-12人<br>高端接待 · 商务宴请</div>
-                        <div class="room-meta">
-                            <span class="room-meta-tag">商务</span>
-                            <span class="room-meta-tag">全景</span>
-                        </div>
-                    </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-num">5</span>
+                    <div class="hero-stat-label">精选包间</div>
                 </div>
-
-                <div class="room-card" onclick="showPano('浪漫情侣包')">
-                    <div class="room-cover" style="background: linear-gradient(135deg, #2a0a2a, #4a1a4a);">💕</div>
-                    <div class="room-body">
-                        <div class="room-name">浪漫情侣包</div>
-                        <div class="room-desc">15-20㎡ · 2-4人<br>星空顶 · 甜蜜约会</div>
-                        <div class="room-meta">
-                            <span class="room-meta-tag">浪漫</span>
-                            <span class="room-meta-tag">全景</span>
-                        </div>
-                    </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">JBL</span>
+                    <div class="hero-stat-label">专业音响</div>
                 </div>
-
-                <div class="room-card" onclick="showPano('超级派对包')">
-                    <div class="room-cover" style="background: linear-gradient(135deg, #0a1a2e, #1a2d4a);">🎉</div>
-                    <div class="room-body">
-                        <div class="room-name">超级派对包</div>
-                        <div class="room-desc">60-80㎡ · 20-30人<br>舞美灯光 · 狂欢盛宴</div>
-                        <div class="room-meta">
-                            <span class="room-meta-tag">派对</span>
-                            <span class="room-meta-tag">全景</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="room-card" onclick="showPano('家庭欢聚包')">
-                    <div class="room-cover" style="background: linear-gradient(135deg, #1a2a0a, #3a4a1a);">👨‍👩‍👧</div>
-                    <div class="room-body">
-                        <div class="room-name">家庭欢聚包</div>
-                        <div class="room-desc">25-35㎡ · 6-8人<br>温馨舒适 · 家庭首选</div>
-                        <div class="room-meta">
-                            <span class="room-meta-tag">家庭</span>
-                            <span class="room-meta-tag">全景</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="room-card" onclick="showPano('迷你欢唱包')">
-                    <div class="room-cover" style="background: linear-gradient(135deg, #2a1a0a, #4a2a1a);">🎙️</div>
-                    <div class="room-body">
-                        <div class="room-name">迷你欢唱包</div>
-                        <div class="room-desc">10-15㎡ · 1-3人<br>一人独享 · 轻松自在</div>
-                        <div class="room-meta">
-                            <span class="room-meta-tag">迷你</span>
-                            <span class="room-meta-tag">全景</span>
-                        </div>
-                    </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-num">12-5</span>
+                    <div class="hero-stat-label">每日营业</div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 亮点特色 -->
-    <section class="section">
-        <div class="section-header fade-up">
-            <div class="section-eyebrow">— FEATURES —</div>
-            <div class="section-title">为什么选择我们</div>
-        </div>
-        <div class="features fade-up">
-            <div class="feature-card">
-                <div class="feature-icon">🔊</div>
-                <div class="feature-name">JBL专业音响</div>
-                <div class="feature-text">全球顶级音响设备，还原每一个音符</div>
+            <div class="hero-cta">
+                <a href="tel:18252023750" class="btn-call">📞 立即预约</a>
+                <a href="#rooms" class="btn-rooms">🎵 查看包间</a>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <div class="feature-name">720°全景包间</div>
-                <div class="feature-text">在线预览包间环境，提前选定心仪空间</div>
+        </section>
+
+        <!-- 包间展示 -->
+        <section class="section" id="rooms">
+            <div class="section-hd fade-up">
+                <span class="section-tag">— ROOMS —</span>
+                <h2 class="section-title">精选包间</h2>
+                <p class="section-sub">点击图片查看实景</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">⏰</div>
-                <div class="feature-name">24H不打烊</div>
-                <div class="feature-text">全天候营业，随时随地，想唱就唱</div>
+            <div class="rooms-scroll fade-up">
+                <div class="rooms-list">
+                    <article class="room-card" onclick="openPano('小包', 'img/xiaobao.jpg')" role="button" tabindex="0">
+                        <div class="room-img-wrap">
+                            <img src="img/xiaobao.jpg" alt="小包内景" class="room-img" loading="lazy">
+                            <div class="room-img-overlay">
+                                <span class="room-img-tag">点击查看全景</span>
+                            </div>
+                        </div>
+                        <div class="room-body">
+                            <h3 class="room-name">小包</h3>
+                            <p class="room-desc">1-5人 · 私密空间 · 轻松欢唱</p>
+                            <div class="room-footer">
+                                <span class="room-badge">私密</span>
+                                <span class="room-badge">全景</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="room-card" onclick="openPano('中包', 'img/zhongbao.jpg')" role="button" tabindex="0">
+                        <div class="room-img-wrap">
+                            <img src="img/zhongbao.jpg" alt="中包内景" class="room-img" loading="lazy">
+                            <div class="room-img-overlay">
+                                <span class="room-img-tag">点击查看全景</span>
+                            </div>
+                        </div>
+                        <div class="room-body">
+                            <h3 class="room-name">中包</h3>
+                            <p class="room-desc">1-8人 · 朋友聚会 · 舒适空间</p>
+                            <div class="room-footer">
+                                <span class="room-badge">聚会</span>
+                                <span class="room-badge">全景</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="room-card" onclick="openPano('大包', 'img/dabao.jpg')" role="button" tabindex="0">
+                        <div class="room-img-wrap">
+                            <img src="img/dabao.jpg" alt="大包内景" class="room-img" loading="lazy">
+                            <div class="room-img-overlay">
+                                <span class="room-img-tag">点击查看全景</span>
+                            </div>
+                        </div>
+                        <div class="room-body">
+                            <h3 class="room-name">大包</h3>
+                            <p class="room-desc">1-12人 · 团建首选 · 氛围感强</p>
+                            <div class="room-footer">
+                                <span class="room-badge">团建</span>
+                                <span class="room-badge">全景</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="room-card" onclick="openPano('小VIP', 'img/xiaovip.jpg')" role="button" tabindex="0">
+                        <div class="room-img-wrap">
+                            <img src="img/xiaovip.jpg" alt="小VIP包间内景" class="room-img" loading="lazy">
+                            <div class="room-img-overlay">
+                                <span class="room-img-tag">点击查看全景</span>
+                            </div>
+                        </div>
+                        <div class="room-body">
+                            <h3 class="room-name">小VIP</h3>
+                            <p class="room-desc">1-15人 · 精致享受 · 品质之选</p>
+                            <div class="room-footer">
+                                <span class="room-badge">VIP</span>
+                                <span class="room-badge">全景</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="room-card" onclick="openPano('VIP', 'img/vip.jpg')" role="button" tabindex="0">
+                        <div class="room-img-wrap">
+                            <img src="img/vip.jpg" alt="VIP包间内景" class="room-img" loading="lazy">
+                            <div class="room-img-overlay">
+                                <span class="room-img-tag">点击查看全景</span>
+                            </div>
+                        </div>
+                        <div class="room-body">
+                            <h3 class="room-name">VIP</h3>
+                            <p class="room-desc">8-12人 · 至尊体验 · 奢华空间</p>
+                            <div class="room-footer">
+                                <span class="room-badge">至尊</span>
+                                <span class="room-badge">全景</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🍷</div>
-                <div class="feature-name">品质酒水</div>
-                <div class="feature-text">精选酒水套餐，品质保证</div>
+        </section>
+
+        <div class="sep"></div>
+
+        <!-- 特色亮点 -->
+        <section class="section" id="features">
+            <div class="section-hd fade-up">
+                <span class="section-tag">— SERVICES —</span>
+                <h2 class="section-title">服务特色</h2>
             </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 联系方式 -->
-    <section class="section">
-        <div class="section-header fade-up">
-            <div class="section-eyebrow">— CONTACT —</div>
-            <div class="section-title">联系我们</div>
-        </div>
-        <div class="contact-panel fade-up">
-            <div class="icon">📞</div>
-            <div class="label">预约热线</div>
-            <div class="phone">182-5202-3750</div>
-            <div class="address">
-                南京市鼓楼区华贸广场<br>
-                （近地铁口 · 免费停车）
+            <div class="features fade-up">
+                <div class="feat">
+                    <div class="feat-icon">🔊</div>
+                    <h3 class="feat-title">JBL专业音响</h3>
+                    <p class="feat-desc">全球顶级设备，还原每一个音符</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">🖼️</div>
+                    <h3 class="feat-title">全景包间预览</h3>
+                    <p class="feat-desc">线上查看实景，提前选定心仪包间</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">⏰</div>
+                    <h3 class="feat-title">12:00—凌晨5:00</h3>
+                    <p class="feat-desc">超长营业时段，尽情欢唱</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-icon">🍷</div>
+                    <h3 class="feat-title">品质酒水套餐</h3>
+                    <p class="feat-desc">精选酒水，丰富套餐选择</p>
+                </div>
             </div>
-            <div class="hours">营业时间：全天24小时</div>
-            <a href="tel:18252023750" class="call-btn">📱 一键拨打热线</a>
-        </div>
-    </section>
+        </section>
 
-    <div class="divider"></div>
+        <div class="sep"></div>
 
-    <!-- 意见反馈 -->
-    <section class="section">
-        <div class="feedback-panel fade-up">
-            <h3>意见反馈</h3>
-            <div class="sub">您的建议是我们进步的动力</div>
-            <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"
-                    height="400" style="border:none; background:transparent; width:100%;">
-                加载中...
-            </iframe>
-        </div>
-    </section>
+        <!-- 关于我们 -->
+        <section class="section" id="about">
+            <div class="section-hd fade-up">
+                <span class="section-tag">— ABOUT —</span>
+                <h2 class="section-title">关于我们</h2>
+            </div>
+            <div class="about-card fade-up">
+                <div class="about-item">
+                    <h3 class="about-item-title">品牌介绍</h3>
+                    <p>华贸魅KTV坐落于南京市鼓楼区华贸广场，配备JBL专业音响系统，营造沉浸式欢唱体验。我们致力于为顾客提供高品质的娱乐休闲服务，是商务洽谈、朋友聚会、家庭欢聚的理想场所。</p>
+                </div>
+                <div class="about-item">
+                    <h3 class="about-item-title">服务承诺</h3>
+                    <p>严格把控音响设备品质，为每位顾客提供干净整洁的包间环境，专业服务团队随时响应您的需求，确保您拥有愉快的消费体验。</p>
+                </div>
+                <div class="about-item">
+                    <h3 class="about-item-title">联系方式</h3>
+                    <p>电话：182-5202-3750<br>地址：南京市鼓楼区华贸新天地3楼<br>营业时间：每日 12:00 — 凌晨5:00</p>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-        <p>© 2024 华贸魅KTV | 南京市鼓楼区华贸广场</p>
-    </footer>
+        <div class="sep"></div>
+
+        <!-- 联系 -->
+        <section class="section" id="contact">
+            <div class="section-hd fade-up">
+                <span class="section-tag">— CONTACT —</span>
+                <h2 class="section-title">联系我们</h2>
+            </div>
+            <div class="contact-card fade-up">
+                <div class="contact-icon">📞</div>
+                <p class="contact-label">预约热线</p>
+                <span class="contact-phone">182-5202-3750</span>
+                <p class="contact-addr">
+                    南京市鼓楼区华贸中心<br>
+                    近地铁口
+                </p>
+                <p class="contact-hours">营业时间 每日 12:00 — 凌晨5:00</p>
+                <a href="tel:18252023750" class="call-btn">📱 拨打热线</a>
+                <a href="https://maps.apple.com/?q=南京鼓楼华贸魅KTV" class="nav-btn">📍 导航到店</a>
+            </div>
+        </section>
+    </main>
 
     <!-- 全景弹窗 -->
-    <div class="pano-overlay" id="panoOverlay">
+    <div class="pano" id="panoOverlay" role="dialog" aria-modal="true" aria-label="包间全景">
         <div class="pano-inner">
-            <div class="pano-header">
-                <span class="pano-title-text" id="panoTitleText">包间全景</span>
-                <button class="pano-close-btn" onclick="hidePano()">✕</button>
+            <div class="pano-hd">
+                <span class="pano-title" id="panoTitle">包间全景</span>
+                <button class="pano-close" onclick="closePano()" aria-label="关闭">✕</button>
             </div>
-            <div class="pano-body">
-                <div class="pano-mic">🎤</div>
-                <div class="pano-hint">720° 全景展示</div>
-                <div class="pano-tip">
-                    滑动屏幕旋转视角<br>
-                    身临其境 · 沉浸体验
+            <div class="pano-bd">
+                <div class="pano-img-container">
+                    <img id="panoImg" class="pano-img" src="" alt="包间全景" />
                 </div>
+                <p class="pano-tip">
+                    支持双指缩放 / 拖动查看<br>
+                    <span class="pano-tip-sub">双击可放大或缩小</span>
+                </p>
             </div>
         </div>
     </div>
 
     <!-- 底部导航 -->
-    <nav class="bottom-nav">
+    <nav class="bottom-nav" aria-label="主导航">
         <a href="#rooms" class="nav-item">
             <span class="nav-icon">🎵</span>
             <span class="nav-text">包间</span>
         </a>
-        <a href="tel:18252023750" class="nav-item">
-            <span class="nav-icon">📞</span>
-            <span class="nav-text">预约</span>
+        <a href="#about" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">关于</span>
         </a>
-        <a href="#rooms" class="nav-item" onclick="document.getElementById('panoOverlay').classList.add('active')">
-            <span class="nav-icon">👁️</span>
-            <span class="nav-text">全景</span>
+        <a href="#contact" class="nav-item">
+            <span class="nav-icon">📞</span>
+            <span class="nav-text">联系</span>
         </a>
     </nav>
 
+    <!-- 页脚 -->
+    <footer>
+        <nav class="footer-links" aria-label="底部链接">
+            <a href="#about" class="footer-link">关于我们</a>
+            <a href="#contact" class="footer-link">联系方式</a>
+            <a href="#privacy" class="footer-link" onclick="openPrivacy(); return false;">隐私政策</a>
+        </nav>
+        <p class="footer-copy">© 2026 华贸魅KTV | 南京市鼓楼区华贸中心</p>
+        <p class="footer-icp">苏ICP备XXXXXXXX号</p>
+    </footer>
+
+    <!-- 隐私政策弹窗 -->
+    <div class="pano" id="privacyOverlay" role="dialog" aria-modal="true" aria-label="隐私政策">
+        <div class="pano-inner">
+            <div class="pano-hd">
+                <span class="pano-title">隐私政策</span>
+                <button class="pano-close" onclick="closePrivacy()" aria-label="关闭">✕</button>
+            </div>
+            <div class="pano-bd" style="overflow-y:auto;">
+                <div style="max-width:540px;padding:20px 0;color:#888;line-height:2;font-size:13px;letter-spacing:1px;">
+                    <h3 style="color:#fff;font-size:16px;margin-bottom:16px;letter-spacing:2px;">隐私政策</h3>
+                    <p style="margin-bottom:16px;">华贸魅KTV（以下简称"我们"）高度重视您的个人隐私保护。本隐私政策说明我们如何收集、使用和保护您的信息。</p>
+                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">一、信息收集</h4>
+                    <p style="margin-bottom:14px;">当您使用我们的官方网站预约服务时，我们可能收集您的电话号码，以便为您提供预约确认服务。我们不会收集与预约无关的个人信息。</p>
+                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">二、信息使用</h4>
+                    <p style="margin-bottom:14px;">您的电话号码仅用于预约联系目的，我们不会向任何第三方出售、出租或透露您的个人信息。</p>
+                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">三、信息保护</h4>
+                    <p style="margin-bottom:14px;">我们采取合理的技术和管理措施，保护您的个人信息安全，防止信息被未经授权访问、使用或泄露。</p>
+                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">四、政策更新</h4>
+                    <p style="margin-bottom:14px;">我们可能不时更新本隐私政策，更新内容将在本页面公布。如有重大变更，我们将通过网站公告通知您。</p>
+                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">五、联系我们</h4>
+                    <p>如您对本隐私政策有任何疑问，请通过官方网站公布的联系方式与我们取得联系。</p>
+                    <p style="margin-top:24px;color:#444;font-size:12px;">最后更新：2026年4月</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 滚动动画
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
                 if (e.isIntersecting) e.target.classList.add('visible');
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.08 });
 
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
 
         // 全景弹窗
-        function showPano(name) {
-            document.getElementById('panoTitleText').textContent = name;
+        var panoImg = document.getElementById('panoImg');
+        var scale = 1, lastScale = 1;
+        var translateX = 0, translateY = 0, lastTX = 0, lastTY = 0;
+        var startDist = 0, startMidX = 0, startMidY = 0;
+        var isDragging = false, startX = 0, startY = 0;
+
+        function resetTransform() {
+            scale = 1; translateX = 0; translateY = 0;
+            lastScale = 1; lastTX = 0; lastTY = 0;
+            if (panoImg) panoImg.style.transform = 'scale(1) translate(0px, 0px)';
+        }
+
+        function openPano(name, imgSrc) {
+            resetTransform();
+            document.getElementById('panoTitle').textContent = name + ' 全景';
+            document.getElementById('panoImg').src = imgSrc;
             document.getElementById('panoOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        function hidePano() {
+        function closePano() {
             document.getElementById('panoOverlay').classList.remove('active');
             document.body.style.overflow = '';
+            resetTransform();
         }
 
         document.getElementById('panoOverlay').addEventListener('click', function(e) {
-            if (e.target === this) hidePano();
+            if (e.target === this) closePano();
+        });
+
+        // 双指缩放
+        function getTouchDist(t1, t2) { return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY); }
+        function getTouchMid(t1, t2) { return { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 }; }
+
+        panoImg.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (e.touches.length === 2) {
+                startDist = getTouchDist(e.touches[0], e.touches[1]);
+                var mid = getTouchMid(e.touches[0], e.touches[1]);
+                startMidX = mid.x; startMidY = mid.y;
+                lastScale = scale;
+            } else if (e.touches.length === 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - translateX;
+                startY = e.touches[0].clientY - translateY;
+                panoImg.classList.add('dragging');
+            }
+        }, { passive: false });
+
+        panoImg.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            if (e.touches.length === 2) {
+                var dist = getTouchDist(e.touches[0], e.touches[1]);
+                var mid = getTouchMid(e.touches[0], e.touches[1]);
+                scale = Math.max(1, Math.min(4, lastScale * (dist / startDist)));
+                var dx = mid.x - startMidX;
+                var dy = mid.y - startMidY;
+                if (scale > 1) { translateX = dx; translateY = dy; }
+            } else if (e.touches.length === 1 && isDragging && scale > 1) {
+                translateX = e.touches[0].clientX - startX;
+                translateY = e.touches[0].clientY - startY;
+            }
+            panoImg.style.transform = 'scale(' + scale + ') translate(' + (translateX / scale) + 'px, ' + (translateY / scale) + 'px)';
+        }, { passive: false });
+
+        panoImg.addEventListener('touchend', function(e) {
+            if (e.touches.length === 0) {
+                isDragging = false;
+                panoImg.classList.remove('dragging');
+                if (scale < 1.1) { scale = 1; translateX = 0; translateY = 0; }
+                panoImg.style.transform = 'scale(' + scale + ') translate(' + (translateX / scale) + 'px, ' + (translateY / scale) + 'px)';
+            }
+        });
+
+        // 鼠标滚轮缩放
+        panoImg.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            var delta = e.deltaY > 0 ? 0.85 : 1.15;
+            scale = Math.max(1, Math.min(4, scale * delta));
+            panoImg.style.transform = 'scale(' + scale + ')';
+        }, { passive: false });
+
+        // 双击切换缩放
+        var lastTap = 0;
+        panoImg.addEventListener('touchend', function(e) {
+            var now = Date.now();
+            if (now - lastTap < 300) {
+                scale = scale > 1.5 ? 1 : 2.5;
+                if (scale === 1) { translateX = 0; translateY = 0; }
+                panoImg.style.transform = 'scale(' + scale + ') translate(' + (translateX / scale) + 'px, ' + (translateY / scale) + 'px)';
+            }
+            lastTap = now;
+        });
+
+        // 隐私政策弹窗
+        function openPrivacy() {
+            document.getElementById('privacyOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePrivacy() {
+            document.getElementById('privacyOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('privacyOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closePrivacy();
         });
     </script>
 </body>

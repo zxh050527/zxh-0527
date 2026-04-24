@@ -1,1226 +1,853 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=yes">
-    <meta name="description" content="华贸魅KTV位于南京鼓楼区华贸中心，配备JBL专业音响，提供沉浸式全景包间，是您商务聚会、朋友欢唱的理想选择。">
-    <meta name="robots" content="index, follow">
-    <title>华贸魅KTV - 南京鼓楼 · 夜娱新地标</title>
-    <link rel="canonical" href="https://www.example.com/">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background: #05050d;
-            color: #fff;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body::before {
-            content: '';
-            position: fixed; inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 15% 0%, rgba(255,45,120,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 70% 50% at 85% 15%, rgba(130,40,255,0.07) 0%, transparent 60%),
-                radial-gradient(ellipse 120% 60% at 50% 100%, rgba(255,45,120,0.05) 0%, transparent 50%);
-            pointer-events: none; z-index: 0;
-        }
-
-        /* ========== 头部 ========== */
-        header {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            padding: 14px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(5,5,13,0.88);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-        }
-
-        .brand { display: flex; flex-direction: column; }
-
-        .brand-name {
-            font-size: 20px;
-            font-weight: 900;
-            background: linear-gradient(90deg, #ff2d78, #ff6ec7, #ff2d78);
-            background-size: 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s linear infinite;
-            letter-spacing: 4px;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% center; }
-            100% { background-position: -200% center; }
-        }
-
-        .brand-sub {
-            font-size: 10px;
-            color: #555;
-            letter-spacing: 3px;
-            margin-top: 1px;
-        }
-
-        .top-call {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #ff2d78, #c4124e);
-            border-radius: 50px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 20px rgba(255,45,120,0.5), 0 0 50px rgba(255,45,120,0.18);
-            transition: all 0.25s;
-        }
-
-        .top-call:active { transform: scale(0.94); }
-
-        /* ========== 主内容 ========== */
-        main { position: relative; z-index: 1; }
-
-        /* 背景光 */
-        .bg-glow { position: fixed; pointer-events: none; z-index: 0; }
-        .glow-1 { top: -20%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,45,120,0.07) 0%, transparent 65%); }
-        .glow-2 { bottom: 30%; left: -25%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(160,80,255,0.05) 0%, transparent 65%); }
-        .glow-3 { top: 50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,100,80,0.04) 0%, transparent 65%); }
-
-        /* 英雄区 */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 90px 24px 120px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -120px; left: 50%;
-            transform: translateX(-50%);
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(255,45,120,0.14) 0%, transparent 70%);
-            pointer-events: none; z-index: 0;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 260px;
-            background: linear-gradient(0deg, #05050d 0%, transparent 100%);
-            z-index: 1;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 22px;
-            border: 1px solid rgba(255,45,120,0.32);
-            border-radius: 50px;
-            font-size: 10px;
-            color: #ff6ec7;
-            letter-spacing: 3px;
-            margin-bottom: 32px;
-            background: rgba(255,45,120,0.08);
-            backdrop-filter: blur(12px);
-            position: relative; z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 46px;
-            font-weight: 900;
-            letter-spacing: 12px;
-            line-height: 1.2;
-            margin-bottom: 6px;
-            position: relative; z-index: 2;
-        }
-
-        .hero-title-main {
-            display: block;
-            background: linear-gradient(90deg, #fff 0%, #ff2d78 60%, #ff8ec4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-title-en {
-            display: block;
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 14px;
-            color: #ff2d78;
-            margin-top: 10px;
-        }
-
-        .hero-divider {
-            width: 48px; height: 2px;
-            background: linear-gradient(90deg, transparent, #ff2d78, transparent);
-            margin: 22px auto;
-            position: relative; z-index: 2;
-        }
-
-        .hero-desc {
-            color: #707080;
-            font-size: 13px;
-            letter-spacing: 2px;
-            line-height: 2.2;
-            position: relative; z-index: 2;
-        }
-
-        .hero-pills {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 22px;
-            position: relative; z-index: 2;
-        }
-
-        .hero-pill {
-            padding: 6px 16px;
-            background: rgba(255,255,255,0.025);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 50px;
-            font-size: 11px;
-            color: #666;
-            letter-spacing: 1px;
-            backdrop-filter: blur(12px);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 36px;
-            margin-top: 42px;
-            justify-content: center;
-            position: relative; z-index: 2;
-        }
-
-        .hero-stat { text-align: center; }
-
-        .hero-stat-num {
-            font-size: 28px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ff2d78, #ff6ec7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-        }
-
-        .hero-stat-label {
-            font-size: 10px;
-            color: #3a3a50;
-            letter-spacing: 2px;
-            margin-top: 4px;
-        }
-
-        .hero-cta {
-            margin-top: 46px;
-            display: flex;
-            gap: 14px;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: relative; z-index: 2;
-        }
-
-        .btn-call {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, #ff2d78 0%, #c4124e 100%);
-            color: #fff;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            box-shadow: 0 8px 32px rgba(255,45,120,0.55), 0 0 70px rgba(255,45,120,0.22);
-            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-call::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -60%;
-            width: 220%; height: 220%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
-            animation: btnSheen 3s ease-in-out infinite;
-        }
-
-        @keyframes btnSheen {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        .btn-call:active { transform: scale(0.95); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
-
-        .btn-rooms {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 18px 40px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #888;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s;
-        }
-
-        .btn-rooms:active { background: rgba(255,255,255,0.09); color: #aaa; transform: scale(0.95); }
-
-        /* 通用 */
-        .section {
-            padding: 64px 0 24px;
-            position: relative; z-index: 1;
-        }
-
-        .section-hd {
-            text-align: center;
-            margin-bottom: 28px;
-            padding: 0 20px;
-        }
-
-        .section-tag {
-            font-size: 9px;
-            color: #ff2d78;
-            letter-spacing: 7px;
-            display: block;
-            margin-bottom: 10px;
-            text-shadow: 0 0 24px rgba(255,45,120,0.5);
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 4px;
-            margin-bottom: 6px;
-        }
-
-        .section-sub {
-            font-size: 11px;
-            color: #3a3a50;
-            letter-spacing: 2px;
-        }
-
-        /* 包间横向滚动 */
-        .rooms-scroll {
-            overflow-x: auto;
-            padding: 0 16px 28px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .rooms-scroll::-webkit-scrollbar { display: none; }
-
-        .rooms-list {
-            display: flex;
-            gap: 16px;
-            width: max-content;
-            padding-right: 16px;
-        }
-
-        .room-card {
-            width: 264px;
-            flex-shrink: 0;
-            scroll-snap-align: start;
-            background: rgba(18,14,32,0.75);
-            border-radius: 22px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            backdrop-filter: blur(24px) saturate(170%);
-            -webkit-backdrop-filter: blur(24px) saturate(170%);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04) inset;
-            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-            cursor: pointer;
-        }
-
-        .room-card:active { transform: scale(0.96) translateY(3px); }
-
-        .room-img-wrap { position: relative; overflow: hidden; }
-
-        .room-img {
-            width: 100%; height: 190px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
-        }
-
-        .room-card:active .room-img { transform: scale(1.07); }
-
-        .room-img-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(0deg, rgba(18,14,32,0.75) 0%, transparent 50%);
-            display: flex;
-            align-items: flex-end;
-            padding: 14px 16px;
-        }
-
-        .room-img-tag {
-            font-size: 9px;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.65);
-            background: rgba(0,0,0,0.5);
-            padding: 4px 12px;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-        }
-
-        .room-body { padding: 20px 18px 22px; }
-
-        .room-name {
-            font-size: 17px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 6px;
-        }
-
-        .room-desc {
-            font-size: 12px;
-            color: #555050;
-            line-height: 1.8;
-        }
-
-        .room-footer {
-            display: flex;
-            gap: 7px;
-            margin-top: 14px;
-            flex-wrap: wrap;
-        }
-
-        .room-badge {
-            padding: 4px 13px;
-            background: rgba(255,45,120,0.13);
-            border: 1px solid rgba(255,45,120,0.22);
-            color: #ff6ec7;
-            border-radius: 50px;
-            font-size: 10px;
-            letter-spacing: 1px;
-        }
-
-        /* 特色亮点 */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            padding: 0 16px;
-            margin-top: 8px;
-        }
-
-        .feat {
-            background: rgba(18,14,32,0.7);
-            border-radius: 20px;
-            padding: 26px 18px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.07);
-            backdrop-filter: blur(22px) saturate(170%);
-            -webkit-backdrop-filter: blur(22px) saturate(170%);
-            box-shadow: 0 10px 32px rgba(0,0,0,0.4);
-            transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
-        }
-
-        .feat:active { background: rgba(28,22,50,0.8); transform: scale(0.96); }
-
-        .feat-icon {
-            font-size: 36px;
-            margin-bottom: 14px;
-            filter: drop-shadow(0 0 14px rgba(255,255,255,0.1));
-        }
-
-        .feat-title {
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-        }
-
-        .feat-desc {
-            font-size: 11px;
-            color: #464655;
-            line-height: 1.7;
-        }
-
-        /* 联系卡片 */
-        .contact-card {
-            margin: 20px 16px;
-            background: rgba(18,14,32,0.75);
-            border-radius: 28px;
-            padding: 44px 24px;
-            text-align: center;
-            border: 1px solid rgba(255,45,120,0.18);
-            backdrop-filter: blur(26px) saturate(190%);
-            -webkit-backdrop-filter: blur(26px) saturate(190%);
-            position: relative; overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(255,45,120,0.07);
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,45,120,0.7), transparent);
-        }
-
-        .contact-card::after {
-            content: '';
-            position: absolute;
-            top: -100px; left: 50%; transform: translateX(-50%);
-            width: 320px; height: 320px;
-            background: radial-gradient(circle, rgba(255,45,120,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .contact-icon { font-size: 48px; margin-bottom: 16px; position: relative; z-index: 1; }
-        .contact-label { font-size: 10px; color: #555; letter-spacing: 5px; margin-bottom: 12px; position: relative; z-index: 1; }
-        .contact-phone {
-            font-size: 32px;
-            font-weight: 900;
-            color: #ff2d78;
-            letter-spacing: 4px;
-            display: block;
-            position: relative; z-index: 1;
-            text-shadow: 0 0 30px rgba(255,45,120,0.4);
-        }
-
-        .contact-addr {
-            margin-top: 22px;
-            font-size: 13px;
-            color: #666;
-            letter-spacing: 1px;
-            line-height: 2;
-            position: relative; z-index: 1;
-        }
-
-        .contact-hours {
-            font-size: 11px;
-            color: #444;
-            letter-spacing: 3px;
-            margin-top: 8px;
-            position: relative; z-index: 1;
-        }
-
-        .call-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 32px;
-            padding: 20px;
-            background: linear-gradient(135deg, #ff2d78, #c4124e);
-            color: #fff;
-            border-radius: 18px;
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-decoration: none;
-            box-shadow: 0 10px 36px rgba(255,45,120,0.5), 0 0 60px rgba(255,45,120,0.2);
-            transition: all 0.3s;
-            position: relative; z-index: 1;
-        }
-
-        .call-btn:active { transform: scale(0.96); }
-
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 16px;
-            padding: 16px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #aaa;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-decoration: none;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s;
-            position: relative; z-index: 1;
-        }
-
-        .nav-btn:active { background: rgba(255,255,255,0.08); color: #fff; transform: scale(0.98); }
-
-        /* 分隔线 */
-        .sep {
-            height: 1px;
-            margin: 16px 40px;
-            background: linear-gradient(90deg, transparent, rgba(255,45,120,0.2), transparent);
-        }
-
-        /* 关于我们 */
-        .about-card {
-            margin: 20px 16px;
-            background: rgba(18,14,32,0.75);
-            border-radius: 28px;
-            padding: 40px 24px;
-            border: 1px solid rgba(255,255,255,0.07);
-            backdrop-filter: blur(26px) saturate(190%);
-            -webkit-backdrop-filter: blur(26px) saturate(190%);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-        }
-
-        .about-text {
-            font-size: 14px;
-            color: #707080;
-            letter-spacing: 1px;
-            line-height: 2;
-        }
-
-        .about-item {
-            margin-bottom: 20px;
-        }
-
-        .about-item-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #ff6ec7;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .about-item p {
-            font-size: 13px;
-            color: #666;
-            letter-spacing: 1px;
-            line-height: 1.9;
-        }
-
-        /* 页脚 */
-        footer {
-            padding: 40px 20px 100px;
-            position: relative; z-index: 1;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 20px;
-        }
-
-        .footer-link {
-            font-size: 11px;
-            color: #444;
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-link:hover { color: #ff6ec7; }
-
-        .footer-copy {
-            text-align: center;
-            color: #333;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
-
-        .footer-icp {
-            margin-top: 8px;
-            font-size: 10px;
-            color: #2a2a2a;
-            letter-spacing: 1px;
-        }
-
-        /* 底部导航 */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            height: 72px;
-            background: rgba(5,5,13,0.92);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding-bottom: env(safe-area-inset-bottom, 0);
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: #444;
-            text-decoration: none;
-            padding: 8px 32px;
-            transition: all 0.3s;
-        }
-
-        .nav-item:active { color: #ff2d78; }
-
-        .nav-icon { font-size: 24px; }
-        .nav-text { font-size: 10px; letter-spacing: 1px; }
-
-        /* 全景弹窗 */
-        .pano {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 2000;
-            background: rgba(2,2,8,0.98);
-        }
-
-        .pano.active {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .pano-inner { height: 100%; display: flex; flex-direction: column; }
-
-        .pano-hd {
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(5,5,13,0.9);
-            backdrop-filter: blur(20px);
-            flex-shrink: 0;
-            z-index: 10;
-        }
-
-        .pano-title { font-size: 16px; letter-spacing: 3px; }
-
-        .pano-close {
-            width: 40px; height: 40px;
-            background: rgba(255,255,255,0.07);
-            border: none;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .pano-close:active { background: rgba(255,255,255,0.15); transform: scale(0.9); }
-
-        .pano-bd {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow: hidden;
-        }
-
-        .pano-img-container {
-            width: 100%;
-            max-width: 540px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 100px rgba(255,45,120,0.1);
-            position: relative;
-            touch-action: none;
-        }
-
-        .pano-img {
-            width: 100%;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            display: block;
-            transform-origin: center;
-            transition: transform 0.3s ease;
-            cursor: grab;
-            -webkit-user-drag: none;
-            user-select: none;
-            max-width: 100%;
-        }
-
-        .pano-img.dragging { cursor: grabbing; transition: none; }
-
-        .pano-tip {
-            margin-top: 28px;
-            padding: 16px 24px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 14px;
-            color: #888;
-            font-size: 13px;
-            letter-spacing: 1px;
-            text-align: center;
-            line-height: 1.9;
-            border: 1px solid rgba(255,255,255,0.07);
-            backdrop-filter: blur(12px);
-        }
-
-        .pano-tip-sub {
-            margin-top: 6px;
-            color: #555;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-
-        /* 动画 */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(22px);
-            transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
-                        transform 0.6s cubic-bezier(0.22,1,0.36,1);
-        }
-
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-        ::-webkit-scrollbar { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人主页</title>
+
+<style>
+:root {
+  --bg: #f7f6f3;
+  --text: #1a1a1a;
+  --sub: #777;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  color: var(--text);
+}
+
+/* 顶部 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  position: relative;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.lang-btn {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: white;
+  font-size: 13px;
+}
+
+/* 内容 */
+.container {
+  max-width: 760px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.desc {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+/* 社交 */
+.social span {
+  margin-right: 20px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.social span:hover {
+  color: #000;
+}
+
+/* 图片氛围 */
+.glow {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.glow img {
+  width: 80%;
+  max-width: 500px;
+  border-radius: 50%;
+  filter: blur(0.5px);
+  opacity: 0.9;
+}
+
+/* ========== Mac 窗口框 ========== */
+.mac-window {
+  margin-top: 60px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e8e3db;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.08);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Menlo', monospace;
+}
+
+.mac-titlebar {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #e8e3db;
+  gap: 8px;
+  position: relative;
+  border-bottom: 1px solid #d4cdc3;
+}
+
+.mac-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mac-dot.red { background: #ff5f57; }
+.mac-dot.yellow { background: #febc2e; }
+.mac-dot.green { background: #28c840; }
+
+.mac-titlebar-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.edit-time {
+  font-size: 11px;
+  color: #888888;
+  margin-left: 8px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.header-btn {
+  background-color: #ddd7ce;
+  border: 1px solid #c9c1b6;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #555555;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.header-btn:hover {
+  background-color: #d1c9be;
+}
+
+#time {
+  font-size: 12px;
+  color: #666666;
+  margin-left: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.render-mode {
+  font-size: 16px;
+  line-height: 2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.lang-cn.render-mode {
+  display: block;
+}
+
+.lang-en.render-mode {
+  display: none;
+}
+
+.render-mode p {
+  margin-bottom: 8px;
+  padding-left: 12px;
+  border-left: 2px solid #7ec4c9;
+  color: #333333;
+}
+
+.lang-en.render-mode p {
+  color: #2c7fb8;
+  font-style: italic;
+}
+
+.raw-mode {
+  display: none;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 16px;
+  background: #e8e3db;
+  border: 1px solid #d4cdc3;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  color: #333333;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.mac-body {
+  padding: 28px 24px 32px;
+  min-height: 160px;
+  background: #e8e3db;
+}
+
+.mac-quote {
+  color: #333333;
+  font-size: 15px;
+  line-height: 2.2;
+  letter-spacing: 0.5px;
+}
+
+.mac-quote .comment {
+  color: #888888;
+}
+
+.mac-quote .keyword {
+  color: #666666;
+}
+
+.mac-quote .string {
+  color: #2c7fb8;
+}
+
+.mac-quote .func {
+  color: #555555;
+}
+
+.mac-quote .number {
+  color: #666666;
+}
+
+.mac-quote .operator {
+  color: #666666;
+}
+
+.mac-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background: #333333;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ========== 音乐播放器 ========== */
+.music-player {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.music-toggle:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  transform: scale(1.05);
+}
+
+.music-toggle.playing {
+  animation: spin 3s linear infinite;
+  border-color: #ff6b9d;
+  background: #fff5f8;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.music-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  border: 1px solid #eee;
+  min-width: 260px;
+  max-width: 300px;
+  z-index: 100;
+}
+
+.music-panel.show {
+  display: block;
+}
+
+.music-info {
+  margin-bottom: 12px;
+}
+
+.music-song-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-artist {
+  font-size: 12px;
+  color: #999;
+}
+
+.music-progress {
+  width: 100%;
+  height: 3px;
+  background: #eee;
+  border-radius: 2px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.music-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b9d, #c084fc);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.3s;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.music-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.music-btn:hover {
+  color: #1a1a1a;
+}
+
+.music-btn.play-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-btn.play-btn:hover {
+  background: #333;
+  color: white;
+}
+
+.music-list-toggle {
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.music-list-toggle:hover {
+  color: #666;
+}
+
+.music-list {
+  display: none;
+  margin-top: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 8px;
+}
+
+.music-list.show {
+  display: block;
+}
+
+.music-list-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+  transition: background 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.music-list-item:hover {
+  background: #f8f8f8;
+}
+
+.music-list-item.active {
+  background: #fff5f8;
+  color: #ff6b9d;
+}
+
+.music-list-item .song-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-list-item .song-artist {
+  font-size: 11px;
+  color: #bbb;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* 弹窗 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.modal img {
+  width: 200px;
+  border-radius: 12px;
+}
+
+/* 语言 */
+.en { display: none; }
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 40px;
+    padding: 0 10px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .mac-window {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+  .mac-titlebar {
+    padding: 10px 8px;
+    flex-wrap: wrap;
+  }
+
+  .mac-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .mac-titlebar-text {
+    font-size: 11px;
+  }
+
+  .edit-time {
+    font-size: 10px;
+    margin-left: 4px;
+  }
+
+  .header-buttons {
+    position: static !important;
+    margin-top: 8px;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+
+  .header-btn {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+
+  #time2 {
+    font-size: 11px;
+    margin-left: 4px;
+  }
+
+  .mac-body {
+    padding: 16px 12px;
+    min-height: auto;
+  }
+
+  .render-mode {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .render-mode p {
+    margin-bottom: 6px;
+    padding-left: 10px;
+    border-left: 1px solid #7ec4c9;
+  }
+
+  .raw-mode {
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 12px;
+    max-height: 50vh;
+  }
+
+  .desc {
+    font-size: 14px;
+  }
+
+  .social span {
+    margin-right: 15px;
+    font-size: 13px;
+  }
+}
+</style>
 </head>
+
 <body>
-    <!-- 背景光 -->
-    <div class="bg-glow glow-1"></div>
-    <div class="bg-glow glow-2"></div>
-    <div class="bg-glow glow-3"></div>
 
-    <!-- 头部 -->
-    <header>
-        <div class="brand">
-            <div class="brand-name">华贸魅KTV</div>
-            <div class="brand-sub">南京鼓楼 · 华贸中心</div>
-        </div>
-        <a href="tel:18252023750" class="top-call">📞 预约</a>
-    </header>
+<div class="header">
+  <div></div>
+  <div class="header-right">
+    <div class="lang-btn" onclick="toggleLang()" id="langBtn">English</div>
+  </div>
+</div>
 
-    <!-- 主内容 -->
-    <main>
-        <!-- 英雄区 -->
-        <section class="hero">
-            <div class="hero-eyebrow">✦ 南京鼓楼 · 夜娱新地标 ✦</div>
-            <h1>
-                <span class="hero-title-main">华贸魅KTV</span>
-                <span class="hero-title-en">MEI KTV</span>
-            </h1>
-            <div class="hero-divider"></div>
-            <p class="hero-desc">
-                沉浸式全景包间 · JBL专业音响<br>
-                营业时间 12:00 — 凌晨5:00
-            </p>
-            <div class="hero-pills">
-                <span class="hero-pill">🎤 KTV</span>
-                <span class="hero-pill">🎉 派对</span>
-                <span class="hero-pill">🛋️ 商务</span>
-                <span class="hero-pill">🌃 夜景</span>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-num">5</span>
-                    <div class="hero-stat-label">精选包间</div>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-num">JBL</span>
-                    <div class="hero-stat-label">专业音响</div>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-num">12-5</span>
-                    <div class="hero-stat-label">每日营业</div>
-                </div>
-            </div>
-            <div class="hero-cta">
-                <a href="tel:18252023750" class="btn-call">📞 立即预约</a>
-                <a href="#rooms" class="btn-rooms">🎵 查看包间</a>
-            </div>
-        </section>
+<div class="container">
 
-        <!-- 包间展示 -->
-        <section class="section" id="rooms">
-            <div class="section-hd fade-up">
-                <span class="section-tag">— ROOMS —</span>
-                <h2 class="section-title">精选包间</h2>
-                <p class="section-sub">点击图片查看实景</p>
-            </div>
-            <div class="rooms-scroll fade-up">
-                <div class="rooms-list">
-                    <article class="room-card" onclick="openPano('小包', 'img/xiaobao.jpg')" role="button" tabindex="0">
-                        <div class="room-img-wrap">
-                            <img src="img/xiaobao.jpg" alt="小包内景" class="room-img" loading="lazy">
-                            <div class="room-img-overlay">
-                                <span class="room-img-tag">点击查看全景</span>
-                            </div>
-                        </div>
-                        <div class="room-body">
-                            <h3 class="room-name">小包</h3>
-                            <p class="room-desc">1-5人 · 私密空间 · 轻松欢唱</p>
-                            <div class="room-footer">
-                                <span class="room-badge">私密</span>
-                                <span class="room-badge">全景</span>
-                            </div>
-                        </div>
-                    </article>
+  <!-- 中文 -->
+  <div class="zh">
+    <div class="name">张兴昊</div>
 
-                    <article class="room-card" onclick="openPano('中包', 'img/zhongbao.jpg')" role="button" tabindex="0">
-                        <div class="room-img-wrap">
-                            <img src="img/zhongbao.jpg" alt="中包内景" class="room-img" loading="lazy">
-                            <div class="room-img-overlay">
-                                <span class="room-img-tag">点击查看全景</span>
-                            </div>
-                        </div>
-                        <div class="room-body">
-                            <h3 class="room-name">中包</h3>
-                            <p class="room-desc">1-8人 · 朋友聚会 · 舒适空间</p>
-                            <div class="room-footer">
-                                <span class="room-badge">聚会</span>
-                                <span class="room-badge">全景</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="room-card" onclick="openPano('大包', 'img/dabao.jpg')" role="button" tabindex="0">
-                        <div class="room-img-wrap">
-                            <img src="img/dabao.jpg" alt="大包内景" class="room-img" loading="lazy">
-                            <div class="room-img-overlay">
-                                <span class="room-img-tag">点击查看全景</span>
-                            </div>
-                        </div>
-                        <div class="room-body">
-                            <h3 class="room-name">大包</h3>
-                            <p class="room-desc">1-12人 · 团建首选 · 氛围感强</p>
-                            <div class="room-footer">
-                                <span class="room-badge">团建</span>
-                                <span class="room-badge">全景</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="room-card" onclick="openPano('小VIP', 'img/xiaovip.jpg')" role="button" tabindex="0">
-                        <div class="room-img-wrap">
-                            <img src="img/xiaovip.jpg" alt="小VIP包间内景" class="room-img" loading="lazy">
-                            <div class="room-img-overlay">
-                                <span class="room-img-tag">点击查看全景</span>
-                            </div>
-                        </div>
-                        <div class="room-body">
-                            <h3 class="room-name">小VIP</h3>
-                            <p class="room-desc">1-15人 · 独立洗手间 · 品质之选</p>
-                            <div class="room-footer">
-                                <span class="room-badge">VIP</span>
-                                <span class="room-badge">全景</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="room-card" onclick="openPano('VIP', 'img/vip.jpg')" role="button" tabindex="0">
-                        <div class="room-img-wrap">
-                            <img src="img/vip.jpg" alt="VIP包间内景" class="room-img" loading="lazy">
-                            <div class="room-img-overlay">
-                                <span class="room-img-tag">点击查看全景</span>
-                            </div>
-                        </div>
-                        <div class="room-body">
-                            <h3 class="room-name">VIP</h3>
-                            <p class="room-desc">1-20人 · 独立洗手间· 奢华空间</p>
-                            <div class="room-footer">
-                                <span class="room-badge">至尊</span>
-                                <span class="room-badge">全景</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <div class="sep"></div>
-
-        <!-- 特色亮点 -->
-        <section class="section" id="features">
-            <div class="section-hd fade-up">
-                <span class="section-tag">— SERVICES —</span>
-                <h2 class="section-title">服务特色</h2>
-            </div>
-            <div class="features fade-up">
-                <div class="feat">
-                    <div class="feat-icon">🔊</div>
-                    <h3 class="feat-title">JBL专业音响</h3>
-                    <p class="feat-desc">全球顶级设备，还原每一个音符</p>
-                </div>
-                <div class="feat">
-                    <div class="feat-icon">🖼️</div>
-                    <h3 class="feat-title">全景包间预览</h3>
-                    <p class="feat-desc">线上查看实景，提前选定心仪包间</p>
-                </div>
-                <div class="feat">
-                    <div class="feat-icon">⏰</div>
-                    <h3 class="feat-title">12:00—凌晨5:00</h3>
-                    <p class="feat-desc">超长营业时段，尽情欢唱</p>
-                </div>
-                <div class="feat">
-                    <div class="feat-icon">🍷</div>
-                    <h3 class="feat-title">品质酒水套餐</h3>
-                    <p class="feat-desc">精选酒水，丰富套餐选择</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="sep"></div>
-
-        <!-- 关于我们 -->
-        <section class="section" id="about">
-            <div class="section-hd fade-up">
-                <span class="section-tag">— ABOUT —</span>
-                <h2 class="section-title">关于我们</h2>
-            </div>
-            <div class="about-card fade-up">
-                <div class="about-item">
-                    <h3 class="about-item-title">品牌介绍</h3>
-                    <p>华贸魅KTV坐落于南京市鼓楼区华贸广场，配备JBL专业音响系统，营造沉浸式欢唱体验。我们致力于为顾客提供高品质的娱乐休闲服务，是商务洽谈、朋友聚会、家庭欢聚的理想场所。</p>
-                </div>
-                <div class="about-item">
-                    <h3 class="about-item-title">服务承诺</h3>
-                    <p>严格把控音响设备品质，为每位顾客提供干净整洁的包间环境，专业服务团队随时响应您的需求，确保您拥有愉快的消费体验。</p>
-                </div>
-                <div class="about-item">
-                    <h3 class="about-item-title">联系方式</h3>
-                    <p>电话：182-5202-3750<br>地址：南京市鼓楼区华贸新天地3楼<br>营业时间：每日 12:00 — 凌晨5:00</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="sep"></div>
-
-        <!-- 联系 -->
-        <section class="section" id="contact">
-            <div class="section-hd fade-up">
-                <span class="section-tag">— CONTACT —</span>
-                <h2 class="section-title">联系我们</h2>
-            </div>
-            <div class="contact-card fade-up">
-                <div class="contact-icon">📞</div>
-                <p class="contact-label">预约热线</p>
-                <span class="contact-phone">182-5202-3750</span>
-                <p class="contact-addr">
-                    南京市鼓楼区华贸中心<br>
-                    近地铁口
-                </p>
-                <p class="contact-hours">营业时间 每日 12:00 — 凌晨5:00</p>
-                <a href="tel:18252023750" class="call-btn">📱 拨打热线</a>
-                <a href="https://maps.apple.com/?q=南京鼓楼华贸魅KTV" class="nav-btn">📍 导航到店</a>
-            </div>
-        </section>
-    </main>
-
-    <!-- 全景弹窗 -->
-    <div class="pano" id="panoOverlay" role="dialog" aria-modal="true" aria-label="包间全景">
-        <div class="pano-inner">
-            <div class="pano-hd">
-                <span class="pano-title" id="panoTitle">包间全景</span>
-                <button class="pano-close" onclick="closePano()" aria-label="关闭">✕</button>
-            </div>
-            <div class="pano-bd">
-                <div class="pano-img-container">
-                    <img id="panoImg" class="pano-img" src="" alt="包间全景" />
-                </div>
-                <p class="pano-tip">
-                    支持双指缩放 / 拖动查看<br>
-                    <span class="pano-tip-sub">双击可放大或缩小</span>
-                </p>
-            </div>
-        </div>
+    <div class="desc">
+      大家好，我是张兴昊，感谢你的观看，祝你平安健康，祝你永远个美好的一天
     </div>
 
-    <!-- 底部导航 -->
-    <nav class="bottom-nav" aria-label="主导航">
-        <a href="#rooms" class="nav-item">
-            <span class="nav-icon">🎵</span>
-            <span class="nav-text">包间</span>
-        </a>
-        <a href="#about" class="nav-item">
-            <span class="nav-icon">🏠</span>
-            <span class="nav-text">关于</span>
-        </a>
-        <a href="#contact" class="nav-item">
-            <span class="nav-icon">📞</span>
-            <span class="nav-text">联系</span>
-        </a>
-    </nav>
+    <div class="social">
+      <span onclick="openWechat()">微信</span>
+      <span onclick="openDouyin()">抖音</span>
+    </div>
+  </div>
 
-    <!-- 页脚 -->
-    <footer>
-        <nav class="footer-links" aria-label="底部链接">
-            <a href="#about" class="footer-link">关于我们</a>
-            <a href="#contact" class="footer-link">联系方式</a>
-            <a href="#privacy" class="footer-link" onclick="openPrivacy(); return false;">隐私政策</a>
-        </nav>
-        <p class="footer-copy">© 2026 华贸魅KTV | 南京市鼓楼区华贸中心</p>
-        <p class="footer-icp">苏ICP备XXXXXXXX号</p>
-    </footer>
+  <!-- 英文 -->
+  <div class="en">
+    <div class="name">Xinghao Zhang</div>
 
-    <!-- 隐私政策弹窗 -->
-    <div class="pano" id="privacyOverlay" role="dialog" aria-modal="true" aria-label="隐私政策">
-        <div class="pano-inner">
-            <div class="pano-hd">
-                <span class="pano-title">隐私政策</span>
-                <button class="pano-close" onclick="closePrivacy()" aria-label="关闭">✕</button>
-            </div>
-            <div class="pano-bd" style="overflow-y:auto;">
-                <div style="max-width:540px;padding:20px 0;color:#888;line-height:2;font-size:13px;letter-spacing:1px;">
-                    <h3 style="color:#fff;font-size:16px;margin-bottom:16px;letter-spacing:2px;">隐私政策</h3>
-                    <p style="margin-bottom:16px;">华贸魅KTV（以下简称"我们"）高度重视您的个人隐私保护。本隐私政策说明我们如何收集、使用和保护您的信息。</p>
-                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">一、信息收集</h4>
-                    <p style="margin-bottom:14px;">当您使用我们的官方网站预约服务时，我们可能收集您的电话号码，以便为您提供预约确认服务。我们不会收集与预约无关的个人信息。</p>
-                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">二、信息使用</h4>
-                    <p style="margin-bottom:14px;">您的电话号码仅用于预约联系目的，我们不会向任何第三方出售、出租或透露您的个人信息。</p>
-                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">三、信息保护</h4>
-                    <p style="margin-bottom:14px;">我们采取合理的技术和管理措施，保护您的个人信息安全，防止信息被未经授权访问、使用或泄露。</p>
-                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">四、政策更新</h4>
-                    <p style="margin-bottom:14px;">我们可能不时更新本隐私政策，更新内容将在本页面公布。如有重大变更，我们将通过网站公告通知您。</p>
-                    <h4 style="color:#ff6ec7;font-size:13px;margin-bottom:8px;">五、联系我们</h4>
-                    <p>如您对本隐私政策有任何疑问，请通过官方网站公布的联系方式与我们取得联系。</p>
-                    <p style="margin-top:24px;color:#444;font-size:12px;">最后更新：2026年4月</p>
-                </div>
-            </div>
-        </div>
+    <div class="desc">
+      Hello everyone, I'm Xinghao Zhang, thank you for watching, wishing you peace and health, wishing you a beautiful day forever.
     </div>
 
-    <script>
-        // 滚动动画
-        var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting) e.target.classList.add('visible');
-            });
-        }, { threshold: 0.08 });
+    <div class="social">
+      <span onclick="openWechat()">WeChat</span>
+      <span onclick="openDouyin()">Douyin</span>
+    </div>
+  </div>
 
-        document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+  <!-- Mac 风格窗口 -->
+  <div class="mac-window">
+    <div class="mac-titlebar">
+      <div class="mac-dot red"></div>
+      <div class="mac-dot yellow"></div>
+      <div class="mac-dot green"></div>
+      <span class="mac-titlebar-text" id="mainTitle">时间有限</span>
+      <span class="edit-time" id="editTime">编写时间</span>
+      <div class="header-buttons" style="position: absolute; right: 12px; top: 8px;">
+        <button class="header-btn" id="langBtn2">EN</button>
+        <button class="header-btn" id="viewBtn2">原始</button>
+        <button class="header-btn" id="copyBtn2">复制</button>
+        <span id="time2"></span>
+      </div>
+    </div>
+    <div class="mac-body">
+      <!-- 中文渲染内容（初始显示） -->
+      <div class="lang-cn render-mode" id="cnContent">
+        <p>你的时间有限</p>
+        <p>所以不要浪费时间过别人的生活</p>
+        <p>你永远不会准备好</p>
+        <p>我知道如果你每天早上起床</p>
+        <p>并将您的手表设置为别人的期望或要求</p>
+        <p>这会让你发疯的</p>
+        <p>那么什么是真的，现在是真的</p>
+        <p>不要浪费时间过别人的生活</p>
+      </div>
 
-        // 全景弹窗
-        var panoImg = document.getElementById('panoImg');
-        var scale = 1, lastScale = 1;
-        var translateX = 0, translateY = 0, lastTX = 0, lastTY = 0;
-        var startDist = 0, startMidX = 0, startMidY = 0;
-        var isDragging = false, startX = 0, startY = 0;
+      <!-- 英文渲染内容（初始隐藏，可切换） -->
+      <div class="lang-en render-mode" id="enContent">
+        <p>your time is limited</p>
+        <p>so don't waste it living someone else's life</p>
+        <p>you'll never be ready</p>
+        <p>I knew that if you got out of bed every morning</p>
+        <p>and set your watch by what other people expect or demand</p>
+        <p>it'd drive you crazy</p>
+        <p>so what was true then it's true now</p>
+        <p>don't waste your time living someone else's life</p>
+      </div>
 
-        function resetTransform() {
-            scale = 1; translateX = 0; translateY = 0;
-            lastScale = 1; lastTX = 0; lastTY = 0;
-            if (panoImg) panoImg.style.transform = 'scale(1) translate(0px, 0px)';
-        }
+      <!-- 原始模式容器 -->
+      <div class="raw-mode" id="rawContent2"></div>
+    </div>
+  </div>
 
-        function openPano(name, imgSrc) {
-            resetTransform();
-            document.getElementById('panoTitle').textContent = name + ' 全景';
-            document.getElementById('panoImg').src = imgSrc;
-            document.getElementById('panoOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+</div>
 
-        function closePano() {
-            document.getElementById('panoOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-            resetTransform();
-        }
+<!-- 微信弹窗 -->
+<div class="modal" id="wechatModal">
+  <div class="modal-box">
+    <img src="img/wechat.png">
+    <p>扫码加我微信</p>
+  </div>
+</div>
 
-        document.getElementById('panoOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closePano();
-        });
+<script>
+let isEn = false;
 
-        // 双指缩放
-        function getTouchDist(t1, t2) { return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY); }
-        function getTouchMid(t1, t2) { return { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 }; }
+function toggleLang() {
+  isEn = !isEn;
 
-        panoImg.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            if (e.touches.length === 2) {
-                startDist = getTouchDist(e.touches[0], e.touches[1]);
-                var mid = getTouchMid(e.touches[0], e.touches[1]);
-                startMidX = mid.x; startMidY = mid.y;
-                lastScale = scale;
-            } else if (e.touches.length === 1) {
-                isDragging = true;
-                startX = e.touches[0].clientX - translateX;
-                startY = e.touches[0].clientY - translateY;
-                panoImg.classList.add('dragging');
-            }
-        }, { passive: false });
+  document.querySelector(".zh").style.display = isEn ? "none" : "block";
+  document.querySelector(".en").style.display = isEn ? "block" : "none";
 
-        panoImg.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            if (e.touches.length === 2) {
-                var dist = getTouchDist(e.touches[0], e.touches[1]);
-                var mid = getTouchMid(e.touches[0], e.touches[1]);
-                scale = Math.max(1, Math.min(4, lastScale * (dist / startDist)));
-                var dx = mid.x - startMidX;
-                var dy = mid.y - startMidY;
-                if (scale > 1) { translateX = dx; translateY = dy; }
-            } else if (e.touches.length === 1 && isDragging && scale > 1) {
-                translateX = e.touches[0].clientX - startX;
-                translateY = e.touches[0].clientY - startY;
-            }
-            panoImg.style.transform = 'scale(' + scale + ') translate(' + (translateX / scale) + 'px, ' + (translateY / scale) + 'px)';
-        }, { passive: false });
+  document.getElementById("langBtn").innerText = isEn ? "中文" : "English";
+  
+  // 同时切换Mac窗口的标题
+  const mainTitle = document.getElementById("mainTitle");
+  if (mainTitle) {
+    mainTitle.innerText = isEn ? "Time is Limited" : "时间有限";
+  }
+}
 
-        panoImg.addEventListener('touchend', function(e) {
-            if (e.touches.length === 0) {
-                isDragging = false;
-                panoImg.classList.remove('dragging');
-                if (scale < 1.1) { scale = 1; translateX = 0; translateY = 0; }
-                panoImg.style.transform = 'scale(' + scale + ') translate(' + (translateX / scale) + 'px, ' + (translateY / scale) + 'px)';
-            }
-        });
+// ========== Mac 窗口新功能 ==========
+let isCN2 = true;  // Mac窗口中文模式
+let isRaw2 = false; // Mac窗口原始模式
 
-        // 鼠标滚轮缩放
-        panoImg.addEventListener('wheel', function(e) {
-            e.preventDefault();
-            var delta = e.deltaY > 0 ? 0.85 : 1.15;
-            scale = Math.max(1, Math.min(4, scale * delta));
-            panoImg.style.transform = 'scale(' + scale + ')';
-        }, { passive: false });
+const langConfig2 = {
+  cn: {
+    editTime: '编写时间',
+    langBtnText: 'EN',
+    viewBtnRaw: '原始',
+    viewBtnRender: '渲染',
+    copyBtnText: '复制',
+    copySuccess: '复制成功！',
+    copyFail: '复制失败：',
+    content: `你的时间有限
+所以不要浪费时间过别人的生活
+你永远不会准备好
+我知道如果你每天早上起床
+并将您的手表设置为别人的期望或要求
+这会让你发疯的
+那么什么是真的，现在是真的
+不要浪费时间过别人的生活`
+  },
+  en: {
+    editTime: 'Edited on',
+    langBtnText: '中文',
+    viewBtnRaw: 'Raw',
+    viewBtnRender: 'Render',
+    copyBtnText: 'Copy',
+    copySuccess: 'Copied successfully!',
+    copyFail: 'Copy failed: ',
+    content: `your time is limited
+so don't waste it living someone else's life
+you'll never be ready
+I knew that if you got out of bed every morning
+and set your watch by what other people expect or demand
+it'd drive you crazy
+so what was true then it's true now
+don't waste your time living someone else's life`
+  }
+};
 
-        // 双击切换缩放
-        var lastTap = 0;
-        panoImg.addEventListener('touchend', function(e) {
-            var now = Date.now();
-            if (now - lastTap < 300) {
-                scale = scale > 1.5 ? 1 : 2.5;
-                if (scale === 1) { translateX = 0; translateY = 0; }
-                panoImg.style.transform = 'scale(' + scale + ') translate(' + (translateX / scale) + 'px, ' + (translateY / scale) + 'px)';
-            }
-            lastTap = now;
-        });
+// 实时时间更新（Mac窗口）
+function updateTime2() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const s = String(now.getSeconds()).padStart(2, '0');
+  const timeEl = document.getElementById('time2');
+  if (timeEl) {
+    timeEl.innerText = `${h}:${m}:${s}`;
+  }
+}
+setInterval(updateTime2, 1000);
+updateTime2();
 
-        // 隐私政策弹窗
-        function openPrivacy() {
-            document.getElementById('privacyOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+// 更新Mac窗口内容
+function updateLangContent2() {
+  const current = isCN2 ? langConfig2.cn : langConfig2.en;
+  const langBtn2 = document.getElementById('langBtn2');
+  const viewBtn2 = document.getElementById('viewBtn2');
+  const copyBtn2 = document.getElementById('copyBtn2');
+  const editTimeEl = document.getElementById('editTime');
+  const rawContent2 = document.getElementById('rawContent2');
+  
+  if (editTimeEl) editTimeEl.innerText = current.editTime;
+  if (langBtn2) langBtn2.innerText = current.langBtnText;
+  if (viewBtn2) viewBtn2.innerText = isRaw2 ? current.viewBtnRender : current.viewBtnRaw;
+  if (copyBtn2) copyBtn2.innerText = current.copyBtnText;
+  
+  if (isRaw2 && rawContent2) {
+    rawContent2.innerText = current.content;
+  }
+}
 
-        function closePrivacy() {
-            document.getElementById('privacyOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-        }
+// Mac窗口中英文切换
+const langBtn2 = document.getElementById('langBtn2');
+if (langBtn2) {
+  langBtn2.addEventListener('click', () => {
+    isCN2 = !isCN2;
+    const cnContent = document.getElementById('cnContent');
+    const enContent = document.getElementById('enContent');
+    
+    if (!isRaw2) {
+      if (cnContent) cnContent.style.display = isCN2 ? 'block' : 'none';
+      if (enContent) enContent.style.display = isCN2 ? 'none' : 'block';
+    }
+    
+    updateLangContent2();
+  });
+}
 
-        document.getElementById('privacyOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closePrivacy();
-        });
-    </script>
+// Mac窗口渲染/原始切换
+const viewBtn2 = document.getElementById('viewBtn2');
+if (viewBtn2) {
+  viewBtn2.addEventListener('click', () => {
+    isRaw2 = !isRaw2;
+    const cnContent = document.getElementById('cnContent');
+    const enContent = document.getElementById('enContent');
+    const rawMode2 = document.querySelector('.raw-mode');
+    
+    if (isRaw2) {
+      if (cnContent) cnContent.style.display = 'none';
+      if (enContent) enContent.style.display = 'none';
+      if (rawMode2) rawMode2.style.display = 'block';
+    } else {
+      if (rawMode2) rawMode2.style.display = 'none';
+      if (cnContent) cnContent.style.display = isCN2 ? 'block' : 'none';
+      if (enContent) enContent.style.display = isCN2 ? 'none' : 'block';
+    }
+    
+    updateLangContent2();
+  });
+}
+
+// Mac窗口复制功能
+const copyBtn2 = document.getElementById('copyBtn2');
+if (copyBtn2) {
+  copyBtn2.addEventListener('click', () => {
+    const current = isCN2 ? langConfig2.cn : langConfig2.en;
+    navigator.clipboard.writeText(current.content).then(() => {
+      alert(current.copySuccess);
+    }).catch(err => {
+      alert(`${current.copyFail}${err}`);
+    });
+  });
+}
+
+// 初始化Mac窗口
+updateLangContent2();
+const cnContent = document.getElementById('cnContent');
+const enContent = document.getElementById('enContent');
+const rawMode2 = document.querySelector('.raw-mode');
+if (cnContent) cnContent.style.display = 'block';
+if (enContent) enContent.style.display = 'none';
+if (rawMode2) rawMode2.style.display = 'none';
+
+// 微信
+function openWechat() {
+  document.getElementById("wechatModal").style.display = "flex";
+}
+
+// 抖音
+function openDouyin() {
+  window.open("https://www.douyin.com/user/MS4wLjABAAAAoZas5m8Sj8_51xEag5oaZXOIOYPkBGt4Tpe_2RpuSqsJdLRV-gLrb8iESQndL4OG?from_tab_name=main");
+}
+
+// 点击关闭
+document.getElementById("wechatModal").onclick = function() {
+  this.style.display = "none";
+}
+
+</script>
+
 </body>
 </html>

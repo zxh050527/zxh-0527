@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>时间有限 — 张兴昊</title>
+<meta name="description" content="你的时间有限，不要浪费时间过别人的生活。" />
+<meta name="author" content="张兴昊" />
+<link rel="canonical" href="https://yourdomain.com/mac.html" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'IBM Plex Mono', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, monospace;
+  background: #f3f1ed;
+  color: #1d1b1b;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ========== Page Layout ========== */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ========== Top Bar ========== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 8px;
+}
+.back-link {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #4f4d4a;
+  transition: color 0.2s ease;
+}
+.back-link:hover { color: #1d1b1b; }
+
+.lang-toggle {
+  font-family: inherit;
+  border: 1px solid #c5c1bb;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fbf9f6;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #1d1b1b;
+  transition: all 0.2s ease;
+}
+.lang-toggle:hover {
+  background: #f1eeea;
+  border-color: #b6b2ac;
+}
+
+/* ========== Prompt Header ========== */
+.prompt-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #c5c1bb;
+}
+.prompt-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1d1b1b;
+  margin-bottom: 12px;
+}
+.prompt-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: #4f4d4a;
+}
+.prompt-meta a {
+  color: #4f4d4a;
+  border-bottom: 1px solid #c5c1bb;
+  padding-bottom: 1px;
+  transition: all 0.2s ease;
+}
+.prompt-meta a:hover {
+  color: #1d1b1b;
+  border-color: #1d1b1b;
+}
+
+/* ========== Article Sections ========== */
+.article {
+  margin-bottom: 40px;
+}
+.article.hidden { display: none; }
+
+.article-section {
+  margin-bottom: 32px;
+}
+.article-section p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4f4d4a;
+  margin-bottom: 16px;
+}
+.article-section:last-child p:last-child { margin-bottom: 0; }
+
+.article-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1b1b;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+/* Highlight spans */
+.hl {
+  background: linear-gradient(180deg, transparent 60%, rgba(87,197,200,0.25) 60%);
+  padding: 0 2px;
+}
+.ylw {
+  background: linear-gradient(180deg, transparent 60%, rgba(251,191,36,0.25) 60%);
+  padding: 0 2px;
+}
+
+/* Date labels */
+.date-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #4f4d4a;
+  margin-bottom: 10px;
+  margin-top: 24px;
+  letter-spacing: 0.02em;
+}
+
+/* Dialogue boxes */
+.dialogue-box {
+  background: #e8e4db;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border: 1px solid #c5c1bb;
+}
+.dialogue-line {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4f4d4a;
+  margin-bottom: 8px;
+}
+.dialogue-line:last-child { margin-bottom: 0; }
+.dialogue-speaker {
+  font-weight: 600;
+  color: #1d1b1b;
+}
+
+/* Usage steps */
+.usage-step {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.usage-step li {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #4f4d4a;
+  margin-bottom: 8px;
+}
+
+/* ========== Code Container (Prompt Block) ========== */
+.code-container {
+  margin-top: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e8e4db;
+  border: 1px solid #c8c3b8;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+}
+
+.code-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #ddd9cf;
+  border-bottom: 1px solid #c8c3b8;
+}
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toolbar-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.toolbar-dot:nth-child(1) { background: #ff5f57; }
+.toolbar-dot:nth-child(2) { background: #febc2e; }
+.toolbar-dot:nth-child(3) { background: #28c840; }
+.toolbar-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #6b665c;
+  margin-left: 10px;
+}
+.toolbar-right {
+  display: flex;
+  gap: 6px;
+}
+.toolbar-btn {
+  font-family: inherit;
+  background: transparent;
+  border: 1px solid #b5b0a6;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #6b665c;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.toolbar-btn:hover {
+  background: #d0cbc0;
+  color: #2a2825;
+  border-color: #9a9588;
+}
+
+.code-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.code-body::-webkit-scrollbar { width: 6px; }
+.code-body::-webkit-scrollbar-track { background: transparent; }
+.code-body::-webkit-scrollbar-thumb { background: #c8c3b8; border-radius: 3px; }
+
+/* Rendered view */
+.rendered-view { color: #2a2825; font-size: 13.5px; }
+.rendered-view.hidden { display: none; }
+
+.section-tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #2a2825;
+  background: #57c5c8;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+.section-tag:first-child { margin-top: 0; }
+
+.section-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #4a4640;
+  margin-bottom: 12px;
+}
+.section-body strong { color: #1d1b1b; }
+
+.sub-item {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #5a5650;
+  margin-bottom: 6px;
+  padding-left: 16px;
+  position: relative;
+}
+.sub-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #6b665c;
+}
+.sub-item strong { color: #1d1b1b; }
+.sub-item em { color: #8a6540; font-style: italic; }
+
+.phase-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1b1b;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #c8c3b8;
+  padding-bottom: 6px;
+}
+
+.analysis-goal {
+  font-size: 12px;
+  color: #4a8c6f;
+  font-style: italic;
+  margin: 6px 0 10px 16px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 6px;
+  border-left: 2px solid rgba(74,140,111,0.3);
+}
+
+.emoji { margin-right: 4px; }
+
+.user-input-placeholder {
+  display: block;
+  font-size: 13px;
+  color: #8a857b;
+  font-style: italic;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.03);
+  border: 1px dashed #b5b0a6;
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
+.output-structure {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: #3a6b8a;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 6px;
+}
+
+/* Raw view */
+.raw-view {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #5a5650;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.raw-view.hidden { display: none; }
+
+/* ========== Copy Toast ========== */
+.copy-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  background: #2a2825;
+  color: #e8e4db;
+  font-family: inherit;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+}
+.copy-toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ========== Feedback Section ========== */
+.feedback-section {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid #c5c1bb;
+}
+.feedback-section p {
+  font-size: 14px;
+  color: #4f4d4a;
+  line-height: 1.7;
+}
+.feedback-section a {
+  color: #57c5c8;
+  border-bottom: 1px solid rgba(87,197,200,0.3);
+  transition: all 0.2s ease;
+}
+.feedback-section a:hover {
+  border-color: #57c5c8;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 640px) {
+  .page { padding: 0 16px 60px; }
+  .prompt-title { font-size: 22px; }
+  .prompt-meta { font-size: 12px; gap: 12px; }
+  .article-section p { font-size: 15px; }
+  .code-body { padding: 16px; }
+  .section-tag { font-size: 10px; }
+  .section-body, .sub-item { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<main class="page">
+  <!-- Top Bar -->
+  <div class="topbar">
+    <a href="zh.html" class="back-link">← 返回</a>
+    <button id="langToggle" class="lang-toggle" type="button">English</button>
+  </div>
+
+  <!-- Prompt Header -->
+  <div class="prompt-header">
+    <h1 class="prompt-title" id="pageTitle">时间有限 — 你的时间有限，不要浪费过别人的生活</h1>
+    <div class="prompt-meta">
+      <span>by <span id="authorName">张兴昊</span></span>
+      <span id="dateLabel">2026年5月</span>
+    </div>
+  </div>
+
+  <!-- Article: ZH -->
+  <div id="article-zh" class="article">
+    <div class="article-section">
+      <p>你的时间有限，所以不要浪费时间过别人的生活。</p>
+      <p>你永远不会准备好。我知道如果你每天早上起床，并将你的手表设置为别人的期望或要求，这会让你发疯的。</p>
+      <p>那么什么是真的，现在是真的。不要浪费时间过别人的生活。</p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">背景</div>
+      <p>这段话来自 Steve Jobs 2005 年在斯坦福大学的演讲。它提醒我们，生命是有限的，不要让他人的意见淹没你内心的声音。</p>
+      <p>在这里写下你自己的故事、思考和感悟。<span class="hl">这是你的空间</span>，后期可以自由修改内容。</p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">思考日记</div>
+
+      <div class="date-label">4月30日 · 开始</div>
+      <p>今天决定把这些想法写下来。<span class="ylw">也许分享本身就是一种勇气。</span></p>
+
+      <div class="date-label">4月30日 · 反思</div>
+      <div class="dialogue-box">
+        <div class="dialogue-line"><span class="dialogue-speaker">我：</span>这样做有意义吗？</div>
+        <div class="dialogue-line"><span class="dialogue-speaker">内心：</span>意义不在于结果，而在于你敢于开始。</div>
+      </div>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">给谁看</div>
+      <p>写给每一个在迷茫中寻找方向的人。也许你正在经历低谷，也许你对未来感到焦虑——但请记住，<span class="hl">你的时间有限</span>，不要把它们浪费在犹豫上。</p>
+    </div>
+  </div>
+
+  <!-- Article: EN -->
+  <div id="article-en" class="article hidden">
+    <div class="article-section">
+      <p>Your time is limited, so don't waste it living someone else's life.</p>
+      <p>You'll never be ready. I knew that if you got out of bed every morning and set your watch by what other people expect or demand, it'd drive you crazy.</p>
+      <p>So what was true then, it's true now. Don't waste your time living someone else's life.</p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">Background</div>
+      <p>This passage is from Steve Jobs' 2005 Stanford Commencement Address. It reminds us that life is finite — don't let others' opinions drown out your inner voice.</p>
+      <p>Write your own stories, thoughts, and reflections here. <span class="hl">This is your space</span> — feel free to modify the content later.</p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">Reflection Diary</div>
+
+      <div class="date-label">May 1 · Beginning</div>
+      <p>Decided to write these thoughts down today. <span class="ylw">Maybe sharing itself is an act of courage.</span></p>
+
+      <div class="date-label">May 2 · Reflection</div>
+      <div class="dialogue-box">
+        <div class="dialogue-line"><span class="dialogue-speaker">Me:</span> Does this even matter?</div>
+        <div class="dialogue-line"><span class="dialogue-speaker">Inner voice:</span> The meaning isn't in the result — it's in your courage to begin.</div>
+      </div>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">Who it's for</div>
+      <p>For everyone searching for direction in the midst of confusion. Maybe you're going through a tough time, maybe you're anxious about the future — but remember, <span class="hl">your time is limited</span>. Don't waste it on hesitation.</p>
+    </div>
+  </div>
+
+  <!-- Copy Toast -->
+  <div class="copy-toast" id="copyToast">✓ 已复制到剪贴板</div>
+
+  <!-- Code Container (Prompt Block) -->
+  <div class="code-container">
+    <div class="code-toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-dot"></span>
+        <span class="toolbar-dot"></span>
+        <span class="toolbar-dot"></span>
+        <span class="toolbar-label">content.txt</span>
+      </div>
+      <div class="toolbar-right">
+        <button class="toolbar-btn" id="langInlineToggle" type="button">EN</button>
+        <button class="toolbar-btn" id="viewToggle" type="button">原始</button>
+        <button class="toolbar-btn" id="copyBtn" type="button">复制</button>
+      </div>
+    </div>
+
+    <div class="code-body">
+      <!-- ZH Rendered -->
+      <div id="rendered-zh" class="rendered-view">
+        <span class="section-tag">引言</span>
+        <div class="section-body">
+          你的时间有限，所以不要浪费时间过别人的生活。
+        </div>
+        <div class="section-body">
+          你永远不会准备好。我知道如果你每天早上起床，并将你的手表设置为别人的期望或要求，这会让你发疯的。
+        </div>
+
+        <span class="section-tag">核心观点</span>
+        <div class="sub-item"><strong>1. 时间有限：</strong>生命是有限的资源，每一天都不可重来。</div>
+        <div class="sub-item"><strong>2. 不要从众：</strong>不要让他人的期望定义你的人生轨迹。</div>
+        <div class="sub-item"><strong>3. 倾听内心：</strong>你内心深处知道什么是对的，不要忽视那个声音。</div>
+        <div class="sub-item"><strong>4. 勇敢行动：</strong>你永远不会觉得准备好了，但那就从现在开始。</div>
+
+        <span class="section-tag">行动建议</span>
+        <div class="section-body">
+          每天花 5 分钟问自己：今天做的事，是我真正想做的，还是别人希望我做的？
+        </div>
+
+        <span class="section-tag">结语</span>
+        <div class="section-body">
+          那么什么是真的，现在是真的。不要浪费时间过别人的生活。Stay hungry, stay foolish.
+        </div>
+      </div>
+
+      <!-- EN Rendered -->
+      <div id="rendered-en" class="rendered-view hidden">
+        <span class="section-tag">Quote</span>
+        <div class="section-body">
+          Your time is limited, so don't waste it living someone else's life.
+        </div>
+        <div class="section-body">
+          You'll never be ready. I knew that if you got out of bed every morning and set your watch by what other people expect or demand, it'd drive you crazy.
+        </div>
+
+        <span class="section-tag">Key Ideas</span>
+        <div class="sub-item"><strong>1. Time is finite:</strong> Life is a limited resource. Every day is non-refundable.</div>
+        <div class="sub-item"><strong>2. Don't conform:</strong> Don't let others' expectations define your path.</div>
+        <div class="sub-item"><strong>3. Listen within:</strong> Deep down, you know what's right. Don't ignore that voice.</div>
+        <div class="sub-item"><strong>4. Act bravely:</strong> You'll never feel ready. Start anyway.</div>
+
+        <span class="section-tag">Action Item</span>
+        <div class="section-body">
+          Spend 5 minutes each day asking yourself: Am I doing what I truly want, or what others expect of me?
+        </div>
+
+        <span class="section-tag">Closing</span>
+        <div class="section-body">
+          So what was true then, it's true now. Don't waste your time living someone else's life. Stay hungry, stay foolish.
+        </div>
+      </div>
+
+      <!-- Raw views -->
+      <div id="raw-zh" class="raw-view hidden"></div>
+      <div id="raw-en" class="raw-view hidden"></div>
+    </div>
+  </div>
+
+  <!-- Feedback -->
+  <div class="feedback-section" id="feedback-zh">
+    <p>如果你也有感触，欢迎分享你的故事。<a href="mailto:437541957@qq.com">437541957@qq.com</a></p>
+  </div>
+  <div class="feedback-section hidden" id="feedback-en">
+    <p>If this resonates with you, feel free to share your story. <a href="mailto:437541957@qq.com">437541957@qq.com</a></p>
+  </div>
+</main>
+
+<script>
+(() => {
+  // ========== Config ==========
+  const rawPrompts = {
+    zh: `引言
+你的时间有限，所以不要浪费时间过别人的生活。
+
+你永远不会准备好。我知道如果你每天早上起床，并将你的手表设置为别人的期望或要求，这会让你发疯的。
+
+核心观点
+1. 时间有限：生命是有限的资源，每一天都不可重来。
+2. 不要从众：不要让他人的期望定义你的人生轨迹。
+3. 倾听内心：你内心深处知道什么是对的，不要忽视那个声音。
+4. 勇敢行动：你永远不会觉得准备好了，但那就从现在开始。
+
+行动建议
+每天花5分钟问自己：今天做的事，是我真正想做的，还是别人希望我做的？
+
+结语
+那么什么是真的，现在是真的。不要浪费时间过别人的生活。Stay hungry, stay foolish.`,
+
+    en: `Quote
+Your time is limited, so don't waste it living someone else's life.
+
+You'll never be ready. I knew that if you got out of bed every morning and set your watch by what other people expect or demand, it'd drive you crazy.
+
+Key Ideas
+1. Time is finite: Life is a limited resource. Every day is non-refundable.
+2. Don't conform: Don't let others' expectations define your path.
+3. Listen within: Deep down, you know what's right. Don't ignore that voice.
+4. Act bravely: You'll never feel ready. Start anyway.
+
+Action Item
+Spend 5 minutes each day asking yourself: Am I doing what I truly want, or what others expect of me?
+
+Closing
+So what was true then, it's true now. Don't waste your time living someone else's life. Stay hungry, stay foolish.`
+  };
+
+  const i18n = {
+    zh: {
+      back: '← 返回',
+      title: '时间有限 — 你的时间有限，不要浪费过别人的生活',
+      author: '张兴昊',
+      date: '2026年4月',
+      toggleLabel: 'English',
+      viewRaw: '原始',
+      viewRendered: '渲染',
+      copy: '复制',
+      copied: '✓',
+      toastMsg: '内容已复制到剪贴板'
+    },
+    en: {
+      back: '← Back',
+      title: 'Time is Limited — Don\'t Waste Your Life Living Someone Else\'s',
+      author: 'Xinghao Zhang',
+      date: 'May 2025',
+      toggleLabel: '中文',
+      viewRaw: 'Raw',
+      viewRendered: 'Rendered',
+      copy: 'Copy',
+      copied: '✓',
+      toastMsg: 'Copied to clipboard'
+    }
+  };
+
+  let currentLang = 'zh';
+  let currentView = 'rendered';
+
+  // Check URL params
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('lang') === 'en') currentLang = 'en';
+
+  // ========== DOM refs ==========
+  const els = {
+    langToggle: document.getElementById('langToggle'),
+    langInline: document.getElementById('langInlineToggle'),
+    viewToggle: document.getElementById('viewToggle'),
+    copyBtn: document.getElementById('copyBtn'),
+    toast: document.getElementById('copyToast'),
+    renderedZh: document.getElementById('rendered-zh'),
+    renderedEn: document.getElementById('rendered-en'),
+    rawZh: document.getElementById('raw-zh'),
+    rawEn: document.getElementById('raw-en'),
+    articleZh: document.getElementById('article-zh'),
+    articleEn: document.getElementById('article-en'),
+    feedbackZh: document.getElementById('feedback-zh'),
+    feedbackEn: document.getElementById('feedback-en'),
+    pageTitle: document.getElementById('pageTitle'),
+    authorName: document.getElementById('authorName'),
+    dateLabel: document.getElementById('dateLabel'),
+    backLink: document.querySelector('.back-link')
+  };
+
+  // Populate raw views
+  els.rawZh.textContent = rawPrompts.zh;
+  els.rawEn.textContent = rawPrompts.en;
+
+  // ========== Functions ==========
+  function updateView() {
+    const s = i18n[currentLang];
+
+    // Update text
+    els.backLink.textContent = s.back;
+    els.pageTitle.textContent = s.title;
+    els.authorName.textContent = s.author;
+    els.dateLabel.textContent = s.date;
+    els.langToggle.textContent = s.toggleLabel;
+    els.langInline.textContent = currentLang === 'zh' ? 'EN' : '中文';
+    els.viewToggle.textContent = currentView === 'rendered' ? s.viewRaw : s.viewRendered;
+    els.copyBtn.textContent = s.copy;
+
+    // Toggle articles
+    els.articleZh.classList.toggle('hidden', currentLang !== 'zh');
+    els.articleEn.classList.toggle('hidden', currentLang !== 'en');
+    els.feedbackZh.classList.toggle('hidden', currentLang !== 'zh');
+    els.feedbackEn.classList.toggle('hidden', currentLang !== 'en');
+
+    // Toggle code views
+    if (currentView === 'rendered') {
+      els.renderedZh.classList.toggle('hidden', currentLang !== 'zh');
+      els.renderedEn.classList.toggle('hidden', currentLang !== 'en');
+      els.rawZh.classList.add('hidden');
+      els.rawEn.classList.add('hidden');
+    } else {
+      els.renderedZh.classList.add('hidden');
+      els.renderedEn.classList.add('hidden');
+      els.rawZh.classList.toggle('hidden', currentLang !== 'zh');
+      els.rawEn.classList.toggle('hidden', currentLang !== 'en');
+    }
+
+    // Update toolbar label
+    document.querySelector('.toolbar-label').textContent = currentLang === 'zh' ? 'content.txt' : 'content.txt';
+  }
+
+  function switchLang() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    updateView();
+  }
+
+  function toggleView() {
+    currentView = currentView === 'rendered' ? 'raw' : 'rendered';
+    updateView();
+  }
+
+  function copyPrompt() {
+    const text = rawPrompts[currentLang];
+    navigator.clipboard.writeText(text).then(() => {
+      const s = i18n[currentLang];
+      els.copyBtn.textContent = s.copied;
+      els.toast.textContent = s.toastMsg;
+      els.toast.classList.add('show');
+      setTimeout(() => {
+        els.copyBtn.textContent = s.copy;
+        els.toast.classList.remove('show');
+      }, 2000);
+    }).catch(() => {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      const s = i18n[currentLang];
+      els.copyBtn.textContent = s.copied;
+      els.toast.textContent = s.toastMsg;
+      els.toast.classList.add('show');
+      setTimeout(() => {
+        els.copyBtn.textContent = s.copy;
+        els.toast.classList.remove('show');
+      }, 2000);
+    });
+  }
+
+  // ========== Event Listeners ==========
+  els.langToggle.addEventListener('click', switchLang);
+  els.langInline.addEventListener('click', switchLang);
+  els.viewToggle.addEventListener('click', toggleView);
+  els.copyBtn.addEventListener('click', copyPrompt);
+
+  // ========== Init ==========
+  updateView();
+})();
+</script>
+
+</body>
+</html>

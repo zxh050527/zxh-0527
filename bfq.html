@@ -408,6 +408,11 @@ html, body {
 .play-btn:hover { transform: scale(1.04); }
 .play-btn:active { transform: scale(0.96); }
 
+/* ========== Player Controls (prev/next) ========== */
+.player-controls {
+  display: none;
+}
+
 /* ========== Responsive ========== */
 @media (max-width: 480px) {
   .card {
@@ -419,33 +424,68 @@ html, body {
   }
   .card-header {
     border-radius: 0;
-    height: 180px;
+    height: 200px;
   }
   .card-body { border-radius: 0; }
-  .topnav { top: 16px; gap: 28px; }
+  .topnav { top: 12px; gap: 28px; }
   .topnav-link { font-size: 12px; letter-spacing: 0.2em; }
-  .header-name { font-size: 24px; }
-  .header-status { font-size: 12px; }
+  .header-name { font-size: 22px; }
+  .header-status { font-size: 11px; margin-top: 2px; padding-left: 36px; }
   .header-time { font-size: 13px; }
-  .meta { padding: 18px 20px 14px; }
-  .meta-name { font-size: 22px; }
+  .meta { padding: 16px 20px 10px; gap: 4px; }
+  .meta-name { font-size: 20px; }
   .meta-sub { font-size: 11px; }
-  .transcript-wrap { margin: 0 10px; }
-  .transcript-scroll { padding: 14px 14px 30px; }
-  .turn-body { font-size: 14px; line-height: 1.5; }
-  .player { padding: 10px 14px 14px; gap: 10px; }
-  .player-time { font-size: 11px; min-width: 28px; }
-  .player-bars { height: 24px; }
-  .play-btn { width: 32px; height: 32px; font-size: 11px; }
-  .mp-btn { width: 20px; height: 20px; font-size: 9px; }
-  .mp-time { font-size: 9.5px; }
-  .wave-wrap { height: 130px; }
+  .mini-player { margin-top: 6px; }
+  .mp-btn { width: 18px; height: 18px; font-size: 8px; }
+  .mp-time { font-size: 9px; }
+  .transcript-wrap { margin: 0 8px; border-radius: 14px; }
+  .transcript-scroll { padding: 16px 16px 30px; }
+  .turn { margin-bottom: 14px; }
+  .turn-body { font-size: 15px; line-height: 1.5; }
+  .wave-wrap { height: 120px; }
+
+  /* Hide old player bar, show new controls */
+  .player { display: none; }
+  .player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 10px 20px 20px;
+    background: #fff;
+    flex-shrink: 0;
+  }
+  .ctrl-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: #111;
+    font-size: 16px;
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: transform 0.12s ease, opacity 0.12s ease;
+    padding: 0;
+  }
+  .ctrl-btn:hover { opacity: 0.6; }
+  .ctrl-btn:active { transform: scale(0.9); }
+  .ctrl-btn.play-pause {
+    width: 52px; height: 52px;
+    background: #111;
+    color: #fff;
+    font-size: 18px;
+  }
+  .ctrl-btn.play-pause:hover { opacity: 0.85; }
 }
 @media (max-width: 360px) {
-  .header-name { font-size: 20px; }
-  .meta-name { font-size: 19px; }
+  .header-name { font-size: 19px; }
+  .meta-name { font-size: 18px; }
   .topnav { gap: 20px; }
   .topnav-link { font-size: 11px; }
+  .card-header { height: 170px; }
+  .player-controls { gap: 24px; padding: 8px 16px 16px; }
+  .ctrl-btn { width: 32px; height: 32px; font-size: 14px; }
+  .ctrl-btn.play-pause { width: 46px; height: 46px; font-size: 16px; }
 }
 </style>
 </head>
@@ -510,11 +550,18 @@ html, body {
         <div class="transcript-fade"></div>
       </div>
 
-      <!-- Player -->
+      <!-- Player (desktop) -->
       <div class="player">
         <div class="player-time" id="playerTime">0:00</div>
         <div class="player-bars" id="scrubber"></div>
         <button class="play-btn" id="playBtn" aria-label="Play">▶</button>
+      </div>
+
+      <!-- Player Controls (mobile) -->
+      <div class="player-controls">
+        <button class="ctrl-btn" id="prevBtn" aria-label="Previous">⏮</button>
+        <button class="ctrl-btn play-pause" id="playBtnMobile" aria-label="Play">▶</button>
+        <button class="ctrl-btn" id="nextBtn" aria-label="Next">⏭</button>
       </div>
     </div>
   </div>
@@ -822,23 +869,48 @@ html, body {
   });
 
   // ========== Play/Pause ==========
+  const playBtnMobile = document.getElementById('playBtnMobile');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
   function syncPlayButton() {
     const playing = !audio.paused;
     playBtn.textContent = playing ? '⏸' : '▶';
     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
     mpBtn.textContent = playing ? '⏸' : '▶';
+    if (playBtnMobile) {
+      playBtnMobile.textContent = playing ? '⏸' : '▶';
+      playBtnMobile.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    }
     dotLive.style.display = playing ? '' : 'none';
     headerStatus.textContent = playing ? 'Playing…' : 'Paused';
   }
   audio.addEventListener('play', syncPlayButton);
   audio.addEventListener('pause', syncPlayButton);
 
-  playBtn.addEventListener('click', () => {
+  function togglePlay() {
     if (!audio.src) { loadSong(0); }
     if (audio.paused) audio.play().catch(() => {});
     else audio.pause();
-  });
+  }
+
+  playBtn.addEventListener('click', togglePlay);
   mpBtn.addEventListener('click', () => playBtn.click());
+  if (playBtnMobile) playBtnMobile.addEventListener('click', togglePlay);
+
+  // ========== Prev / Next ==========
+  function prevSong() {
+    const idx = (currentIndex - 1 + playlist.length) % playlist.length;
+    loadSong(idx);
+    audio.play().catch(() => {});
+  }
+  function nextSong() {
+    const idx = (currentIndex + 1) % playlist.length;
+    loadSong(idx);
+    audio.play().catch(() => {});
+  }
+  if (prevBtn) prevBtn.addEventListener('click', prevSong);
+  if (nextBtn) nextBtn.addEventListener('click', nextSong);
 
   // ========== Mini player line seek ==========
   mpLine.addEventListener('pointerdown', e => {

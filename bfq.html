@@ -935,14 +935,13 @@ html, body {
     if (isPlaying) {
       audio.pause();
     } else {
-      // Unlock AudioContext if needed (first user gesture)
       ensureAnalyser();
-      if (audioCtx && audioCtx.state === 'suspended') {
-        audioCtx.resume().catch(() => {});
-      }
-      // Always play the audio — even if analyser failed (file:// CORS), audio element plays fine
-      audio.play().catch(e => {
-        console.warn('Play failed:', e);
+      // Resume AudioContext if suspended (required by browsers after first user gesture)
+      const resumeCtx = (audioCtx && audioCtx.state === 'suspended')
+        ? audioCtx.resume()
+        : Promise.resolve();
+      resumeCtx.then(() => audio.play()).catch(e => {
+        console.warn('Audio play failed:', e.message || e);
       });
     }
   }
@@ -1076,28 +1075,24 @@ html, body {
     requestAnimationFrame(updateUI);
   }
 
-  // Mobile: unlock AudioContext on first user gesture (no auto-play)
+  // Mobile: unlock AudioContext on first user gesture
   function unlockAudio() {
     ensureAnalyser();
-    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-    window.removeEventListener('click', unlockAudio);
-    window.removeEventListener('touchstart', unlockAudio);
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
   }
-  window.addEventListener('click', unlockAudio, { once: true });
-  window.addEventListener('touchstart', unlockAudio, { once: true });
+  window.addEventListener('click', unlockAudio);
+  window.addEventListener('touchstart', unlockAudio);
 
   // ---------- Song ended ----------
   audio.addEventListener('ended', () => {
     const next = (currentIndex + 1) % playlist.length;
     loadSong(next);
-    ensureAnalyser();
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume().then(() => {
-        audio.play().catch(() => {});
-      }).catch(() => {});
-    } else {
-      audio.play().catch(() => {});
-    }
+    const resumeCtx = (audioCtx && audioCtx.state === 'suspended')
+      ? audioCtx.resume()
+      : Promise.resolve();
+    resumeCtx.then(() => audio.play()).catch(() => {});
   });
 
   // ---------- Init ----------

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>关于感情 — 张兴昊</title>
+<meta name="description" content="感情是唯一不需要理由的事情。" />
+<meta name="author" content="张兴昊" />
+<link rel="canonical" href="https://yourdomain.com/macgq.html" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'IBM Plex Mono', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, monospace;
+  background: #f3f1ed;
+  color: #1d1b1b;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ========== Page Layout ========== */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ========== Top Bar ========== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 8px;
+}
+.back-link {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #4f4d4a;
+  transition: color 0.2s ease;
+}
+.back-link:hover { color: #1d1b1b; }
+
+.lang-toggle {
+  font-family: inherit;
+  border: 1px solid #c5c1bb;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fbf9f6;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #1d1b1b;
+  transition: all 0.2s ease;
+}
+.lang-toggle:hover {
+  background: #f1eeea;
+  border-color: #b6b2ac;
+}
+
+/* ========== Prompt Header ========== */
+.prompt-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #c5c1bb;
+}
+.prompt-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1d1b1b;
+  margin-bottom: 12px;
+}
+.prompt-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: #4f4d4a;
+}
+.prompt-meta a {
+  color: #4f4d4a;
+  border-bottom: 1px solid #c5c1bb;
+  padding-bottom: 1px;
+  transition: all 0.2s ease;
+}
+.prompt-meta a:hover {
+  color: #1d1b1b;
+  border-color: #1d1b1b;
+}
+
+/* ========== Article Sections ========== */
+.article {
+  margin-bottom: 40px;
+}
+.article.hidden { display: none; }
+
+.article-section {
+  margin-bottom: 32px;
+}
+.article-section p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4f4d4a;
+  margin-bottom: 16px;
+}
+.article-section:last-child p:last-child { margin-bottom: 0; }
+
+.article-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1b1b;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+/* Highlight spans */
+.hl {
+  background: linear-gradient(180deg, transparent 60%, rgba(200,120,150,0.25) 60%);
+  padding: 0 2px;
+}
+.ylw {
+  background: linear-gradient(180deg, transparent 60%, rgba(251,191,36,0.25) 60%);
+  padding: 0 2px;
+}
+.pnk {
+  background: linear-gradient(180deg, transparent 60%, rgba(220,130,160,0.20) 60%);
+  padding: 0 2px;
+}
+
+/* Date labels */
+.date-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #4f4d4a;
+  margin-bottom: 10px;
+  margin-top: 24px;
+  letter-spacing: 0.02em;
+}
+
+/* Dialogue boxes */
+.dialogue-box {
+  background: #e8e4db;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border: 1px solid #c5c1bb;
+}
+.dialogue-line {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4f4d4a;
+  margin-bottom: 8px;
+}
+.dialogue-line:last-child { margin-bottom: 0; }
+.dialogue-speaker {
+  font-weight: 600;
+  color: #1d1b1b;
+}
+
+/* Usage steps */
+.usage-step {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.usage-step li {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #4f4d4a;
+  margin-bottom: 8px;
+}
+
+/* ========== Code Container (Prompt Block) ========== */
+.code-container {
+  margin-top: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e8e4db;
+  border: 1px solid #c8c3b8;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+}
+
+.code-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #ddd9cf;
+  border-bottom: 1px solid #c8c3b8;
+}
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toolbar-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.toolbar-dot:nth-child(1) { background: #ff5f57; }
+.toolbar-dot:nth-child(2) { background: #febc2e; }
+.toolbar-dot:nth-child(3) { background: #28c840; }
+.toolbar-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: #6b665c;
+  margin-left: 10px;
+}
+.toolbar-right {
+  display: flex;
+  gap: 6px;
+}
+.toolbar-btn {
+  font-family: inherit;
+  background: transparent;
+  border: 1px solid #b5b0a6;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #6b665c;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.toolbar-btn:hover {
+  background: #d0cbc0;
+  color: #2a2825;
+  border-color: #9a9588;
+}
+
+.code-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.code-body::-webkit-scrollbar { width: 6px; }
+.code-body::-webkit-scrollbar-track { background: transparent; }
+.code-body::-webkit-scrollbar-thumb { background: #c8c3b8; border-radius: 3px; }
+
+/* Rendered view */
+.rendered-view { color: #2a2825; font-size: 13.5px; }
+.rendered-view.hidden { display: none; }
+
+.section-tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #2a2825;
+  background: #c87896;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+.section-tag:first-child { margin-top: 0; }
+
+.section-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #4a4640;
+  margin-bottom: 12px;
+}
+.section-body strong { color: #1d1b1b; }
+
+.sub-item {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #5a5650;
+  margin-bottom: 6px;
+  padding-left: 16px;
+  position: relative;
+}
+.sub-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #6b665c;
+}
+.sub-item strong { color: #1d1b1b; }
+.sub-item em { color: #8a6540; font-style: italic; }
+
+.phase-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1b1b;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #c8c3b8;
+  padding-bottom: 6px;
+}
+
+.analysis-goal {
+  font-size: 12px;
+  color: #4a8c6f;
+  font-style: italic;
+  margin: 6px 0 10px 16px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 6px;
+  border-left: 2px solid rgba(74,140,111,0.3);
+}
+
+.emoji { margin-right: 4px; }
+
+.user-input-placeholder {
+  display: block;
+  font-size: 13px;
+  color: #8a857b;
+  font-style: italic;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.03);
+  border: 1px dashed #b5b0a6;
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
+.output-structure {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: #3a6b8a;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 6px;
+}
+
+/* Raw view */
+.raw-view {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #5a5650;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.raw-view.hidden { display: none; }
+
+/* ========== Copy Toast ========== */
+.copy-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  background: #2a2825;
+  color: #e8e4db;
+  font-family: inherit;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+}
+.copy-toast.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ========== Feedback Section ========== */
+.feedback-section {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid #c5c1bb;
+}
+.feedback-section p {
+  font-size: 14px;
+  color: #4f4d4a;
+  line-height: 1.7;
+}
+.feedback-section a {
+  color: #c87896;
+  border-bottom: 1px solid rgba(200,120,150,0.3);
+  transition: all 0.2s ease;
+}
+.feedback-section a:hover {
+  border-color: #c87896;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 640px) {
+  .page { padding: 0 16px 60px; }
+  .prompt-title { font-size: 22px; }
+  .prompt-meta { font-size: 12px; gap: 12px; }
+  .article-section p { font-size: 15px; }
+  .code-body { padding: 16px; }
+  .section-tag { font-size: 10px; }
+  .section-body, .sub-item { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<main class="page">
+  <!-- Top Bar -->
+  <div class="topbar">
+    <a href="index.html" class="back-link">← 返回</a>
+    <button id="langToggle" class="lang-toggle" type="button">English</button>
+  </div>
+
+  <!-- Prompt Header -->
+  <div class="prompt-header">
+    <h1 class="prompt-title" id="pageTitle">关于感情 — 爱是唯一不需要理由的事情</h1>
+    <div class="prompt-meta">
+      <span>by <span id="authorName">张兴昊</span></span>
+      <span id="dateLabel">2026年5月</span>
+    </div>
+  </div>
+
+  <!-- Article: ZH -->
+  <div id="article-zh" class="article">
+    <div class="article-section">
+      <p>感情是唯一不需要理由的事情。</p>
+      <p>你无法计算它、衡量它、或者用逻辑去解释它。当你试图用理性去解构感情的时候，它已经悄悄溜走了。</p>
+      <p>所以，如果你感受到了什么——不要问为什么，<span class="hl">去感受就好</span>。</p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">背景</div>
+      <p>从小到大，我们被教导要理性、要克制、要为未来做计划。但感情从来不在计划之中。它像一阵风，你不知道它从哪里来，也不知道它往哪里去。</p>
+      <p>这篇文字写给那些在感情里小心翼翼的人。<span class="hl">勇敢不是不害怕</span>，而是害怕之后仍然选择向前。</p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">思考日记</div>
+
+      <div class="date-label">5月3日 · 开始</div>
+      <p>今天想明白了一件事：<span class="pnk">感情不需要结果才有意义。</span> 相遇本身就已经是礼物。</p>
+
+      <div class="date-label">5月4日 · 对话</div>
+      <div class="dialogue-box">
+        <div class="dialogue-line"><span class="dialogue-speaker">我：</span>如果最后会受伤，还要开始吗？</div>
+        <div class="dialogue-line"><span class="dialogue-speaker">内心：</span>花会因为凋零就不开吗？</div>
+      </div>
+
+      <div class="date-label">5月5日 · 顿悟</div>
+      <div class="dialogue-box">
+        <div class="dialogue-line"><span class="dialogue-speaker">我：</span>怎么样才知道这是爱？</div>
+        <div class="dialogue-line"><span class="dialogue-speaker">内心：</span>当你不再问这个问题的时候。</div>
+      </div>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">给谁看</div>
+      <p>写给每一个在感情里犹豫不决的人。写给那个想表达却不敢表达的你，写给那个<em>明明在乎却假装无所谓的你</em>。</p>
+      <p>你的心不会骗你。<span class="hl">如果你在乎，那就承认吧。</span> 时间有限，不要在胆怯中错过。</p>
+      <p>—— 张兴昊，关于感情</p>
+    </div>
+  </div>
+
+  <!-- Article: EN -->
+  <div id="article-en" class="article hidden">
+    <div class="article-section">
+      <p>Feelings are the only things that need no reason.</p>
+      <p>You can't calculate them, measure them, or explain them with logic. The moment you try to dissect a feeling with reason, it has already slipped away.</p>
+      <p>So if you feel something — <span class="hl">don't ask why. Just feel it.</span></p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">Background</div>
+      <p>From a young age, we're taught to be rational, to restrain ourselves, to plan for the future. But feelings have never followed a plan. They're like the wind — you don't know where they come from, or where they're going.</p>
+      <p>This is for those who tiptoe around their emotions. <span class="hl">Bravery isn't the absence of fear</span> — it's choosing to move forward despite it.</p>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">Reflection Diary</div>
+
+      <div class="date-label">May 3 · Beginning</div>
+      <p>Realized something today: <span class="pnk">Feelings don't need a result to be meaningful.</span> The encounter itself is already a gift.</p>
+
+      <div class="date-label">May 4 · Dialogue</div>
+      <div class="dialogue-box">
+        <div class="dialogue-line"><span class="dialogue-speaker">Me:</span> What if I get hurt in the end? Should I still start?</div>
+        <div class="dialogue-line"><span class="dialogue-speaker">Inner voice:</span> Does a flower refuse to bloom because it will wither?</div>
+      </div>
+
+      <div class="date-label">May 5 · Epiphany</div>
+      <div class="dialogue-box">
+        <div class="dialogue-line"><span class="dialogue-speaker">Me:</span> How do I know if it's love?</div>
+        <div class="dialogue-line"><span class="dialogue-speaker">Inner voice:</span> When you stop asking that question.</div>
+      </div>
+    </div>
+
+    <div class="article-section">
+      <div class="article-section-title">Who it's for</div>
+      <p>For everyone hesitating in matters of the heart. For you who want to speak but dare not. For you who <em>care deeply but pretend not to</em>.</p>
+      <p>Your heart won't lie to you. <span class="hl">If you care, own it.</span> Time is limited. Don't let cowardice make you miss what matters.</p>
+      <p>— Xinghao Zhang, on feelings</p>
+    </div>
+  </div>
+
+  <!-- Copy Toast -->
+  <div class="copy-toast" id="copyToast">✓ 已复制到剪贴板</div>
+
+  <!-- Code Container (Prompt Block) -->
+  <div class="code-container">
+    <div class="code-toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-dot"></span>
+        <span class="toolbar-dot"></span>
+        <span class="toolbar-dot"></span>
+        <span class="toolbar-label">feelings.txt</span>
+      </div>
+      <div class="toolbar-right">
+        <button class="toolbar-btn" id="langInlineToggle" type="button">EN</button>
+        <button class="toolbar-btn" id="viewToggle" type="button">原始</button>
+        <button class="toolbar-btn" id="copyBtn" type="button">复制</button>
+      </div>
+    </div>
+
+    <div class="code-body">
+      <!-- ZH Rendered -->
+      <div id="rendered-zh" class="rendered-view">
+        <span class="section-tag">引言</span>
+        <div class="section-body">
+          感情是唯一不需要理由的事情。
+        </div>
+        <div class="section-body">
+          你无法计算它、衡量它、或者用逻辑去解释它。当你试图用理性去解构感情的时候，它已经悄悄溜走了。
+        </div>
+
+        <span class="section-tag">核心观点</span>
+        <div class="sub-item"><strong>1. 感情不讲逻辑：</strong>真正的感情经不起理性的拆解，它本身就是答案。</div>
+        <div class="sub-item"><strong>2. 勇敢去感受：</strong>不要因为害怕受伤就关闭自己的心。花会因为凋零就不开吗？</div>
+        <div class="sub-item"><strong>3. 过程即意义：</strong>感情不需要结果才有意义。相遇本身就是礼物。</div>
+        <div class="sub-item"><strong>4. 承认你在乎：</strong>如果你在乎，那就承认吧。时间有限，不要在胆怯中错过。</div>
+
+        <span class="section-tag">一句话</span>
+        <div class="section-body">
+          爱是当你不再问"这是爱吗"的时候，你就知道了。
+        </div>
+
+        <span class="section-tag">结语</span>
+        <div class="section-body">
+          所以，如果你感受到了什么——不要问为什么，去感受就好。你的心不会骗你。
+        </div>
+      </div>
+
+      <!-- EN Rendered -->
+      <div id="rendered-en" class="rendered-view hidden">
+        <span class="section-tag">Preface</span>
+        <div class="section-body">
+          Feelings are the only things that need no reason.
+        </div>
+        <div class="section-body">
+          You can't calculate them, measure them, or explain them with logic. The moment you try to dissect a feeling with reason, it has already slipped away.
+        </div>
+
+        <span class="section-tag">Key Ideas</span>
+        <div class="sub-item"><strong>1. Feelings defy logic:</strong> True feelings cannot be taken apart by reason. They are their own answer.</div>
+        <div class="sub-item"><strong>2. Dare to feel:</strong> Don't close your heart for fear of getting hurt. Does a flower refuse to bloom because it will wither?</div>
+        <div class="sub-item"><strong>3. The journey is the meaning:</strong> Feelings don't need a result to be meaningful. The encounter itself is already a gift.</div>
+        <div class="sub-item"><strong>4. Own it:</strong> If you care, admit it. Time is limited. Don't let fear steal what matters.</div>
+
+        <span class="section-tag">In a Nutshell</span>
+        <div class="section-body">
+          You know it's love when you stop asking "Is this love?"
+        </div>
+
+        <span class="section-tag">Closing</span>
+        <div class="section-body">
+          So if you feel something — don't ask why. Just feel it. Your heart won't lie to you.
+        </div>
+      </div>
+
+      <!-- Raw views -->
+      <div id="raw-zh" class="raw-view hidden"></div>
+      <div id="raw-en" class="raw-view hidden"></div>
+    </div>
+  </div>
+
+  <!-- Feedback -->
+  <div class="feedback-section" id="feedback-section">
+    <p id="feedback-zh">如果你也有关于感情的故事，欢迎分享。<a href="mailto:437541957@qq.com">437541957@qq.com</a></p>
+    <p id="feedback-en" style="display:none;">If you have a story about feelings, feel free to share. <a href="mailto:437541957@qq.com">437541957@qq.com</a></p>
+  </div>
+</main>
+
+<script>
+(() => {
+  // ========== Config ==========
+  const rawPrompts = {
+    zh: `引言
+感情是唯一不需要理由的事情。
+
+你无法计算它、衡量它、或者用逻辑去解释它。当你试图用理性去解构感情的时候，它已经悄悄溜走了。
+
+核心观点
+1. 感情不讲逻辑：真正的感情经不起理性的拆解，它本身就是答案。
+2. 勇敢去感受：不要因为害怕受伤就关闭自己的心。花会因为凋零就不开吗？
+3. 过程即意义：感情不需要结果才有意义。相遇本身就是礼物。
+4. 承认你在乎：如果你在乎，那就承认吧。时间有限，不要在胆怯中错过。
+
+一句话
+爱是当你不再问"这是爱吗"的时候，你就知道了。
+
+结语
+所以，如果你感受到了什么——不要问为什么，去感受就好。你的心不会骗你。`,
+
+    en: `Preface
+Feelings are the only things that need no reason.
+
+You can't calculate them, measure them, or explain them with logic. The moment you try to dissect a feeling with reason, it has already slipped away.
+
+Key Ideas
+1. Feelings defy logic: True feelings cannot be taken apart by reason. They are their own answer.
+2. Dare to feel: Don't close your heart for fear of getting hurt. Does a flower refuse to bloom because it will wither?
+3. The journey is the meaning: Feelings don't need a result to be meaningful. The encounter itself is already a gift.
+4. Own it: If you care, admit it. Time is limited. Don't let fear steal what matters.
+
+In a Nutshell
+You know it's love when you stop asking "Is this love?"
+
+Closing
+So if you feel something — don't ask why. Just feel it. Your heart won't lie to you.`
+  };
+
+  const i18n = {
+    zh: {
+      back: '← 返回',
+      title: '关于感情 — 爱是唯一不需要理由的事情',
+      author: '张兴昊',
+      date: '2026年5月',
+      toggleLabel: 'English',
+      viewRaw: '原始',
+      viewRendered: '渲染',
+      copy: '复制',
+      copied: '✓',
+      toastMsg: '内容已复制到剪贴板'
+    },
+    en: {
+      back: '← Back',
+      title: 'On Feelings — Love Is the Only Thing That Needs No Reason',
+      author: 'Xinghao Zhang',
+      date: 'May 2026',
+      toggleLabel: '中文',
+      viewRaw: 'Raw',
+      viewRendered: 'Rendered',
+      copy: 'Copy',
+      copied: '✓',
+      toastMsg: 'Copied to clipboard'
+    }
+  };
+
+  let currentLang = 'zh';
+  let currentView = 'rendered';
+
+  // Check URL params
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('lang') === 'en') currentLang = 'en';
+
+  // ========== DOM refs ==========
+  const els = {
+    langToggle: document.getElementById('langToggle'),
+    langInline: document.getElementById('langInlineToggle'),
+    viewToggle: document.getElementById('viewToggle'),
+    copyBtn: document.getElementById('copyBtn'),
+    toast: document.getElementById('copyToast'),
+    renderedZh: document.getElementById('rendered-zh'),
+    renderedEn: document.getElementById('rendered-en'),
+    rawZh: document.getElementById('raw-zh'),
+    rawEn: document.getElementById('raw-en'),
+    articleZh: document.getElementById('article-zh'),
+    articleEn: document.getElementById('article-en'),
+    feedbackZh: document.getElementById('feedback-zh'),
+    feedbackEn: document.getElementById('feedback-en'),
+    pageTitle: document.getElementById('pageTitle'),
+    authorName: document.getElementById('authorName'),
+    dateLabel: document.getElementById('dateLabel'),
+    backLink: document.querySelector('.back-link')
+  };
+
+  // Populate raw views
+  els.rawZh.textContent = rawPrompts.zh;
+  els.rawEn.textContent = rawPrompts.en;
+
+  // ========== Functions ==========
+  function updateView() {
+    const s = i18n[currentLang];
+
+    // Update text
+    els.backLink.textContent = s.back;
+    els.pageTitle.textContent = s.title;
+    els.authorName.textContent = s.author;
+    els.dateLabel.textContent = s.date;
+    els.langToggle.textContent = s.toggleLabel;
+    els.langInline.textContent = currentLang === 'zh' ? 'EN' : '中文';
+    els.viewToggle.textContent = currentView === 'rendered' ? s.viewRaw : s.viewRendered;
+    els.copyBtn.textContent = s.copy;
+
+    // Toggle articles
+    els.articleZh.classList.toggle('hidden', currentLang !== 'zh');
+    els.articleEn.classList.toggle('hidden', currentLang !== 'en');
+
+    // Toggle feedback
+    els.feedbackZh.style.display = currentLang === 'zh' ? '' : 'none';
+    els.feedbackEn.style.display = currentLang === 'en' ? '' : 'none';
+
+    // Toggle code views
+    if (currentView === 'rendered') {
+      els.renderedZh.classList.toggle('hidden', currentLang !== 'zh');
+      els.renderedEn.classList.toggle('hidden', currentLang !== 'en');
+      els.rawZh.classList.add('hidden');
+      els.rawEn.classList.add('hidden');
+    } else {
+      els.renderedZh.classList.add('hidden');
+      els.renderedEn.classList.add('hidden');
+      els.rawZh.classList.toggle('hidden', currentLang !== 'zh');
+      els.rawEn.classList.toggle('hidden', currentLang !== 'en');
+    }
+
+    // Update toolbar label
+    document.querySelector('.toolbar-label').textContent = 'feelings.txt';
+  }
+
+  function switchLang() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    updateView();
+  }
+
+  function toggleView() {
+    currentView = currentView === 'rendered' ? 'raw' : 'rendered';
+    updateView();
+  }
+
+  function copyPrompt() {
+    const text = rawPrompts[currentLang];
+    navigator.clipboard.writeText(text).then(() => {
+      const s = i18n[currentLang];
+      els.copyBtn.textContent = s.copied;
+      els.toast.textContent = s.toastMsg;
+      els.toast.classList.add('show');
+      setTimeout(() => {
+        els.copyBtn.textContent = s.copy;
+        els.toast.classList.remove('show');
+      }, 2000);
+    }).catch(() => {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      const s = i18n[currentLang];
+      els.copyBtn.textContent = s.copied;
+      els.toast.textContent = s.toastMsg;
+      els.toast.classList.add('show');
+      setTimeout(() => {
+        els.copyBtn.textContent = s.copy;
+        els.toast.classList.remove('show');
+      }, 2000);
+    });
+  }
+
+  // ========== Event Listeners ==========
+  els.langToggle.addEventListener('click', switchLang);
+  els.langInline.addEventListener('click', switchLang);
+  els.viewToggle.addEventListener('click', toggleView);
+  els.copyBtn.addEventListener('click', copyPrompt);
+
+  // ========== Init ==========
+  updateView();
+})();
+</script>
+
+</body>
+</html>
